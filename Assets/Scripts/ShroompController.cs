@@ -10,10 +10,14 @@ public class ShroompController : MonoBehaviour
     //int isJumping = 0;
     Rigidbody2D rigidbody2d;
 
+    public ParticleSystem impactEffect;
 
     bool isGrounded;
+    bool isTouchingLeft, isTouchingRight, isTouchingUp;
+
     public float checkRadius;
-    public Transform groundCheck;
+    public Transform groundCheck, leftCheck, rightCheck, upCheck;
+
     int dashes;
     bool isDashing;
     public float dashingTimer;
@@ -113,6 +117,56 @@ public class ShroompController : MonoBehaviour
                 }
                 //ShroompSpriteT.rotation = Quaternion.Slerp(ShroompSpriteT.rotation, Quaternion.Euler(0, 0, dashSpriteDirection), 1);
                 ShroompSpriteT.rotation = Quaternion.Euler(0, 0, dashSpriteDirection);
+
+            //Code for impacts and particle effcts
+            Vector2 impactVelocity = new Vector2(0, 0);
+            if(isTouchingUp)
+            {
+                rigidbody2d.velocity = impactVelocity;
+                isDashing = false;
+                animator.SetBool("Dash", false);
+                animator.SetBool("Jumping", false);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = upCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(90, 90, 0);
+                impactEffect.Play();
+            }
+            else if(isTouchingLeft)
+            {
+                rigidbody2d.velocity = impactVelocity;
+                isDashing = false;
+                animator.SetBool("Dash", false);
+                animator.SetBool("Jumping", false);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = leftCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(0, 90, 90);
+                impactEffect.Play();
+            }
+            else if(isTouchingRight)
+            {
+                rigidbody2d.velocity = impactVelocity;
+                isDashing = false;
+                animator.SetBool("Dash", false);
+                animator.SetBool("Jumping", false);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = rightCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(0, -90, -90);
+                impactEffect.Play();
+            }
+            else if(isGrounded)
+            {
+                rigidbody2d.velocity = impactVelocity;
+                isDashing = false;
+                animator.SetBool("Dash", false);
+                animator.SetBool("Jumping", false);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = groundCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(-90, 90, 0);
+                impactEffect.Play();
+            }
         }
     }
     void FixedUpdate()
@@ -123,9 +177,12 @@ public class ShroompController : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
+        isTouchingLeft = Physics2D.OverlapCircle(leftCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
+        isTouchingRight = Physics2D.OverlapCircle(rightCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
+        isTouchingUp = Physics2D.OverlapCircle(upCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
 
 
-        
+
     }
     void dashingEffect()
     {
