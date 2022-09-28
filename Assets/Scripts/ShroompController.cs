@@ -26,7 +26,9 @@ public class ShroompController : MonoBehaviour
     float dashSpriteDirection;
     Transform ShroompSpriteT;
     Vector2 direction;
+    Vector2 mouseDirection;
     Vector2 lookDirection = new Vector2(1, 0);
+    Vector2 charOrigin;
 
     private float lastImageXpos;
 
@@ -45,6 +47,28 @@ public class ShroompController : MonoBehaviour
 
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+        // Sets char origin
+        charOrigin = new Vector2(Camera.main.WorldToScreenPoint(rigidbody2d.position).x, Camera.main.WorldToScreenPoint(rigidbody2d.position).y);
+         //Assigns x and y values based on char position
+        if(Input.mousePosition.x > charOrigin.x)
+        {
+            mouseDirection.x = Input.mousePosition.x - charOrigin.x;
+        }
+        if(Input.mousePosition.x < charOrigin.x)
+        {
+            mouseDirection.x = -1 * (charOrigin.x - Input.mousePosition.x);
+        }
+        if(Input.mousePosition.y > charOrigin.y)
+        {
+            mouseDirection.y = Input.mousePosition.y - charOrigin.y;
+        }
+        if (Input.mousePosition.y < charOrigin.y)
+        {
+            mouseDirection.y = -1 *(charOrigin.y - Input.mousePosition.y);
+        }
+        //Normalizes the mouse direction vector
+        mouseDirection.Normalize();
+
         Vector2 move = new Vector2(direction.x, 0);
         if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
@@ -61,6 +85,9 @@ public class ShroompController : MonoBehaviour
             if (dashingTimer <0)
             {
                 isDashing = false;
+                animator.SetBool("Dash", false);
+                animator.SetBool("Jumping", false);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
             }
             dashingEffect();
         }
@@ -83,7 +110,7 @@ public class ShroompController : MonoBehaviour
         {
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
-            rigidbody2d.velocity = new Vector2(direction.x * dashPower, direction.y * dashPower);
+            rigidbody2d.velocity = new Vector2(mouseDirection.x * dashPower, mouseDirection.y * dashPower);
             dashes = 0;
             isDashing = true;
             dashingTimer = 1f;

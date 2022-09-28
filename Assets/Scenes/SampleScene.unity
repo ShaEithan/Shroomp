@@ -45632,7 +45632,7 @@ PrefabInstance:
       objectReference: {fileID: 1396143850}
     - target: {fileID: 1291059828, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
       propertyPath: dashPower
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1291059828, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
       propertyPath: leftCheck
