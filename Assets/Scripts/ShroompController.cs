@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShroompController : MonoBehaviour
 {
@@ -32,13 +33,24 @@ public class ShroompController : MonoBehaviour
 
     private float lastImageXpos;
 
+    [SerializeField]
+    private int maxHealth = 5;
+    private int currentHealth =5;
+    private float timeInvincible = 2.0f;
 
+    bool isInvincible;
+    float invincibleTimer;
+
+    TextMeshProUGUI textHealth;
+    Transform healthCanvasPos;
     // Start is called before the first frame update
     void Start()
     {
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         ShroompSpriteT = GameObject.Find("ShroompSprite").GetComponent<Transform>();
+        textHealth = GameObject.Find("charHealthText").GetComponent<TMPro.TextMeshProUGUI>();
+        healthCanvasPos = GameObject.Find("CanvasHealth").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -195,6 +207,16 @@ public class ShroompController : MonoBehaviour
                 impactEffect.Play();
             }
         }
+
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer < 0)
+                isInvincible = false;
+        }
+
+        textHealth.text = (currentHealth + " / " + maxHealth);
+        healthCanvasPos.position = new Vector2(rigidbody2d.position.x, rigidbody2d.position.y + 0.5f);
     }
     void FixedUpdate()
     {
@@ -221,5 +243,19 @@ public class ShroompController : MonoBehaviour
             AfterImagePool.Instance.GetFromPool();
             lastImageXpos = transform.position.x;
         }
+    }
+
+    public void ChangeHealth(int amount)
+    {
+        if (amount < 0)
+        {
+            if (isInvincible)
+                return;
+
+            isInvincible = true;
+            invincibleTimer = timeInvincible;
+        }
+
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
 }
