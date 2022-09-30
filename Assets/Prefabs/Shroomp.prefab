@@ -580,14 +580,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 175
   jumpPower: 5
-  dashPower: 25
+  dashPower: 15
+  dashAmmount: 3
   impactEffect: {fileID: 5531023404614688915}
   checkRadius: 0.05
   groundCheck: {fileID: 1997390721}
   leftCheck: {fileID: 5415631948498451344}
   rightCheck: {fileID: 5860836729163461493}
   upCheck: {fileID: 8673820401150522457}
-  dashingTimer: 1
+  dashTime: 0.25
   maxHealth: 5
 --- !u!95 &7352362289519744018
 Animator:

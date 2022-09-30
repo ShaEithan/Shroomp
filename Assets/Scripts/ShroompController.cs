@@ -8,6 +8,7 @@ public class ShroompController : MonoBehaviour
     public float speed = 3.0f;
     public float jumpPower = 10;
     public float dashPower = 50;
+    public int dashAmmount = 3;
     //int isJumping = 0;
     Rigidbody2D rigidbody2d;
 
@@ -21,7 +22,8 @@ public class ShroompController : MonoBehaviour
 
     int dashes;
     bool isDashing;
-    public float dashingTimer;
+    private float dashingTimer;
+    public float dashTime = 0.05f;
     float jumpDelay;
     Animator animator;
     float dashSpriteDirection;
@@ -100,6 +102,12 @@ public class ShroompController : MonoBehaviour
                 animator.SetBool("Dash", false);
                 animator.SetBool("Jumping", false);
                 ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+
+                //Re adds gravity scale when dash ends by impact
+                rigidbody2d.gravityScale = 1;
+
+                //Makes velocity zero when dash ends
+                rigidbody2d.velocity = new Vector2(0, 0);
             }
             dashingEffect();
         }
@@ -123,9 +131,11 @@ public class ShroompController : MonoBehaviour
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
             rigidbody2d.velocity = new Vector2(mouseDirection.x * dashPower, mouseDirection.y * dashPower);
-            dashes = 0;
+            dashes = dashes-1;
             isDashing = true;
-            dashingTimer = 1f;
+            //Set gravit to 0 for dashing
+            rigidbody2d.gravityScale = 0;
+            dashingTimer = dashTime;
         }
        
        else if(Input.GetKeyDown("space") && isGrounded ==true)
@@ -133,7 +143,7 @@ public class ShroompController : MonoBehaviour
             Debug.Log("Normal jump attempt");
             animator.SetBool("Jumping", true);
             rigidbody2d.velocity = Vector2.up * jumpPower;
-            dashes = 1;
+            dashes = dashAmmount;
             jumpDelay = .05f;
         }
        //Trajectory code when dashing for rotation of sprite
@@ -169,6 +179,8 @@ public class ShroompController : MonoBehaviour
                 impactEffect.transform.position = upCheck.transform.position;
                 impactEffect.transform.rotation = Quaternion.Euler(90, 90, 0);
                 impactEffect.Play();
+                //Re adds gravity scale when dash ends by impact
+                rigidbody2d.gravityScale = 1;
             }
             else if(isTouchingLeft)
             {
@@ -181,6 +193,9 @@ public class ShroompController : MonoBehaviour
                 impactEffect.transform.position = leftCheck.transform.position;
                 impactEffect.transform.rotation = Quaternion.Euler(0, 90, 90);
                 impactEffect.Play();
+
+                //Re adds gravity scale when dash ends by impact
+                rigidbody2d.gravityScale = 1;
             }
             else if(isTouchingRight)
             {
@@ -193,6 +208,9 @@ public class ShroompController : MonoBehaviour
                 impactEffect.transform.position = rightCheck.transform.position;
                 impactEffect.transform.rotation = Quaternion.Euler(0, -90, -90);
                 impactEffect.Play();
+
+                //Re adds gravity scale when dash ends by impact
+                rigidbody2d.gravityScale = 1;
             }
             else if(isGrounded)
             {
@@ -205,6 +223,9 @@ public class ShroompController : MonoBehaviour
                 impactEffect.transform.position = groundCheck.transform.position;
                 impactEffect.transform.rotation = Quaternion.Euler(-90, 90, 0);
                 impactEffect.Play();
+
+                //Re adds gravity scale when dash ends by impact
+                rigidbody2d.gravityScale = 1;
             }
         }
 
