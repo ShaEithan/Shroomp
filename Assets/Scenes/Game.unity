@@ -28091,7 +28091,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -28195,7 +28195,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1291059824}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -45391,13 +45391,9 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1291059828, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
-      propertyPath: dashTime
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1291059828, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
-      propertyPath: dashPower
-      value: 15
+    - target: {fileID: 1249046444, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
+      propertyPath: m_Name
+      value: Reticle
       objectReference: {fileID: 0}
     - target: {fileID: 1613707729, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
       propertyPath: m_Camera
