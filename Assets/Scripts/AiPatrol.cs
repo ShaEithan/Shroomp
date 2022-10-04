@@ -54,20 +54,15 @@ public class AiPatrol : MonoBehaviour
         mustPatrol = true;
     }
 
-    void ChangeHealth(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("frog collided with shroomp Trigger");
+        Debug.Log("Trigger");
         ShroompController player = collision.gameObject.GetComponent<ShroompController>();
 
         if (player != null)
         {
             player.ChangeHealth(-1);
         }
-    }
-
-    public void ChangeHealth(int amount)
-    {
-           currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
     }
 
 
