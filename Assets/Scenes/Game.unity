@@ -28511,7 +28511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc128433ba076b428f140bbc81b13b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 150
+  walkSpeed: 125
   mustPatrol: 0
   rb: {fileID: 1519449818}
   groundCheckPos: {fileID: 1752463188}
