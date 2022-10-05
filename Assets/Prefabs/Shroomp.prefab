@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 1249046445}
   - component: {fileID: 1249046446}
   m_Layer: 7
-  m_Name: Rectile
+  m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -836,6 +836,8 @@ MonoBehaviour:
   jumpPower: 5
   dashPower: 15
   dashAmmount: 3
+  wallGrabJumpPower: 460
+  wallGrabTimeSetter: 0.3
   impactEffect: {fileID: 5531023404614688915}
   checkRadius: 0.05
   groundCheck: {fileID: 1997390721}

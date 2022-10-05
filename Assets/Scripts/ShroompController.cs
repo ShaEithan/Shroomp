@@ -9,6 +9,12 @@ public class ShroompController : MonoBehaviour
     public float jumpPower = 10;
     public float dashPower = 50;
     public int dashAmmount = 3;
+    //Used to calculate the jump that happens against the wall
+    public float wallGrabJumpPower = 4f;
+    //Used to set time for wall jumps, too low and it gets you stuck on the wall
+    public float wallGrabTimeSetter = 1f;
+    //Ammount of air time before wall jump ends and collision check can occur again
+    private float grabTimer = -1f; 
     //int isJumping = 0;
     Rigidbody2D rigidbody2d;
 
@@ -49,8 +55,13 @@ public class ShroompController : MonoBehaviour
     //Circle rectile stuff
     Transform rangeCircle,rectile;
     private float rangeOffset,reticleOffset;
-
+    //random test variable remove later
     public float testX = 1f;
+
+    //Wall grab mode stuff
+    private bool isWallGrab = false;
+    private bool canWallJump;
+    private bool lastSideJumped; // True is Left, False is Right, used to remember last side of wall jumped
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +77,7 @@ public class ShroompController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        wallGrabCheck();
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Sets char origin
@@ -119,6 +130,7 @@ public class ShroompController : MonoBehaviour
             }
             dashingEffect();
         }
+        //delay after jumping before another ground jump can occur, used to avoid jump going crazy
         if (jumpDelay > 0)
         {
             jumpDelay -= Time.deltaTime;
@@ -126,7 +138,7 @@ public class ShroompController : MonoBehaviour
         }
         else if (isGrounded == true)
         {
-            dashes = 0;
+            dashes = dashAmmount;
             Debug.Log("I am grounded");
             animator.SetBool("Jumping", false);
             animator.SetBool("Dash", false);
@@ -134,7 +146,8 @@ public class ShroompController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown("space") && dashes > 0)
+        //A dash will happen as long as you aren't in the process of a wall jump, or are grounded
+        if (Input.GetKeyDown("space") && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
         {
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
@@ -145,16 +158,16 @@ public class ShroompController : MonoBehaviour
             rigidbody2d.gravityScale = 0;
             dashingTimer = dashTime;
         }
-
-        else if (Input.GetKeyDown("space") && isGrounded == true)
+        //A jump can happen as long as you are in the ground, and aren't grabbing a wall
+        else if (Input.GetKeyDown("space") && isGrounded == true && !isWallGrab)
         {
             Debug.Log("Normal jump attempt");
             animator.SetBool("Jumping", true);
             rigidbody2d.velocity = Vector2.up * jumpPower;
-            dashes = dashAmmount;
+            //dashes = dashAmmount;
             jumpDelay = .05f;
         }
-        //Trajectory code when dashing for rotation of sprite
+        //Trajectory code when dashing for rotation of sprite using principles of unit circle to calculate angle
         if (isDashing)
         {
 
@@ -192,7 +205,7 @@ public class ShroompController : MonoBehaviour
             }
             else if (isTouchingLeft)
             {
-                rigidbody2d.velocity = impactVelocity;
+                //rigidbody2d.velocity = impactVelocity;
                 isDashing = false;
                 animator.SetBool("Dash", false);
                 animator.SetBool("Jumping", false);
@@ -203,11 +216,11 @@ public class ShroompController : MonoBehaviour
                 impactEffect.Play();
 
                 //Re adds gravity scale when dash ends by impact
-                rigidbody2d.gravityScale = 1;
+                //rigidbody2d.gravityScale = 1;
             }
             else if (isTouchingRight)
             {
-                rigidbody2d.velocity = impactVelocity;
+                //rigidbody2d.velocity = impactVelocity;
                 isDashing = false;
                 animator.SetBool("Dash", false);
                 animator.SetBool("Jumping", false);
@@ -218,7 +231,7 @@ public class ShroompController : MonoBehaviour
                 impactEffect.Play();
 
                 //Re adds gravity scale when dash ends by impact
-                rigidbody2d.gravityScale = 1;
+                //rigidbody2d.gravityScale = 1;
             }
             else if (isGrounded)
             {
@@ -236,14 +249,14 @@ public class ShroompController : MonoBehaviour
                 rigidbody2d.gravityScale = 1;
             }
         }
-
+        //Used countdown invincibility time to avoid taking damage too much in a couple of frames of collision detection
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
             if (invincibleTimer < 0)
                 isInvincible = false;
         }
-
+        //Used to show health
         textHealth.text = (currentHealth + " / " + maxHealth);
         healthCanvasPos.position = new Vector2(rigidbody2d.position.x, rigidbody2d.position.y + 0.5f);
 
@@ -256,10 +269,13 @@ public class ShroompController : MonoBehaviour
         rectile.transform.localPosition = new Vector2((mouseDirection.x * dashPower) *dashTime, (mouseDirection.y * dashPower) * dashTime);
         //Code for rotation the circle
         rangeCircle.transform.Rotate(0, 0, -8 * Time.deltaTime);
+        
     }
     void FixedUpdate()
     {
-        if (!isDashing)
+        //Can't use movement controls while dashing or grabbing a wall
+        //If setting velocity or adding force isn't working it's prob related to this
+        if (!isDashing && grabTimer<0 && !isWallGrab)
         {
             rigidbody2d.velocity = new Vector2(direction.x * speed * Time.deltaTime, rigidbody2d.velocity.y);
         }
@@ -268,8 +284,7 @@ public class ShroompController : MonoBehaviour
         isTouchingLeft = Physics2D.OverlapCircle(leftCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
         isTouchingRight = Physics2D.OverlapCircle(rightCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
         isTouchingUp = Physics2D.OverlapCircle(upCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
-
-
+        
 
     }
     void dashingEffect()
@@ -283,7 +298,80 @@ public class ShroompController : MonoBehaviour
             lastImageXpos = transform.position.x;
         }
     }
+    void wallGrabCheck()
+    {
+        if (grabTimer > 0)
+            grabTimer -= Time.deltaTime;
 
+        if (grabTimer < 0)
+            canWallJump = true;
+        //Debug.Log("Global" + grabTimer);
+        if (!isGrounded && grabTimer < 0)
+        {
+            // Left Side code wall jumping
+            // Checks you are touching a wall, uses grabTimer to avoid multiple checks on side of wall
+            // That end up getting you stuck, similar premise for normal jump delay
+            // !lastSideJumped bypasses grabTimer as it means you came from opposite side wall so its ok to proceed
+            // With no collide issues
+            // Could probably be simplified as canWalljump = grabTimer <0 
+            if(isTouchingLeft && (grabTimer < 0 || !lastSideJumped) && canWallJump )
+            {
+                animator.SetBool("Jumping", false);
+                rigidbody2d.gravityScale = 0;
+                rigidbody2d.velocity = Vector2.zero;
+                isWallGrab = true;
+
+
+            }
+            
+            if (isTouchingLeft && Input.GetKeyDown("space") && isWallGrab && grabTimer < 0)
+            {
+                rigidbody2d.gravityScale = 1;
+                rigidbody2d.AddForce(new Vector2(wallGrabJumpPower, wallGrabJumpPower * 0.6f));
+                isWallGrab = false;
+                canWallJump = false;
+                grabTimer = wallGrabTimeSetter;
+                lastSideJumped = true;
+
+                //Optional dust on bounce off
+                animator.SetBool("Jumping", true);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = leftCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(0, 90, 90);
+                impactEffect.Play();
+            }
+            //Right side wall jumping code
+            if (isTouchingRight && (grabTimer < 0 || lastSideJumped) && canWallJump)
+            {
+                animator.SetBool("Jumping", false);
+                rigidbody2d.gravityScale = 0;
+                rigidbody2d.velocity = Vector2.zero;
+                isWallGrab = true;
+
+
+            }
+
+            if (isTouchingRight && Input.GetKeyDown("space") && isWallGrab && grabTimer < 0)
+            {
+                rigidbody2d.gravityScale = 1;
+                rigidbody2d.AddForce(new Vector2(-1*wallGrabJumpPower, wallGrabJumpPower * 0.6f));
+                isWallGrab = false;
+                canWallJump = false;
+                grabTimer = wallGrabTimeSetter;
+                lastSideJumped = false;
+
+                //Optional dust bounce off
+                animator.SetBool("Jumping", true);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+                impactEffect.transform.position = rightCheck.transform.position;
+                impactEffect.transform.rotation = Quaternion.Euler(0, -90, -90);
+                impactEffect.Play();
+            }
+        }
+        
+    }
     public void ChangeHealth(int amount)
     {
         if (amount < 0)
