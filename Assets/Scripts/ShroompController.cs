@@ -27,7 +27,7 @@ public class ShroompController : MonoBehaviour
     public Transform groundCheck, leftCheck, rightCheck, upCheck;
 
     int dashes;
-    bool isDashing;
+    public bool isDashing;
     private float dashingTimer;
     public float dashTime = 0.05f;
     float jumpDelay;

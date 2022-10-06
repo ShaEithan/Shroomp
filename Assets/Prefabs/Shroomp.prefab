@@ -844,6 +844,7 @@ MonoBehaviour:
   leftCheck: {fileID: 5415631948498451344}
   rightCheck: {fileID: 5860836729163461493}
   upCheck: {fileID: 8673820401150522457}
+  isDashing: 0
   dashTime: 0.25
   maxHealth: 5
   testX: 1
