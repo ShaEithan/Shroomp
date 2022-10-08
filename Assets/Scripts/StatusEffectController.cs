@@ -9,18 +9,23 @@ public class StatusEffectController : MonoBehaviour
     //Keep track of power ups activated
     public bool fireUp = true;
     public bool iceUp = true;
-
+    public bool bombUp;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //bombUp = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (!(fireUp || iceUp || bombUp))
+        {
+            DOT = 0f;
+        }
+        else { DOT = 10f; }
+        Debug.Log("Fire is: " + fireUp + " Ice is: " + iceUp + " Bomb is: " + bombUp);
     }
 
     public float getDotTime()

@@ -671,6 +671,7 @@ GameObject:
   - component: {fileID: 1291059829}
   - component: {fileID: 1291059828}
   - component: {fileID: 7352362289519744018}
+  - component: {fileID: 905683366013322351}
   m_Layer: 7
   m_Name: Shroomp
   m_TagString: Player
@@ -868,6 +869,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &905683366013322351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478506650662896067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2c0ec11bf0aad419e034dd91ec72a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DOT: 10
+  fireUp: 1
+  iceUp: 1
+  bombUp: 0
 --- !u!1 &7017099256006953130
 GameObject:
   m_ObjectHideFlags: 0

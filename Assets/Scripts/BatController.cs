@@ -5,7 +5,7 @@ using TMPro;
 public class BatController : MonoBehaviour
 {
     //Status handle script
-    public StatusEffectController statusHandler;
+    private StatusEffectController statusHandler;
     private float dotTime,dotInvulTime;
     private bool dotActive;
     private bool dotIsInvul = false;
@@ -33,6 +33,7 @@ public class BatController : MonoBehaviour
     public int iceWeakness = 1;
 
     SpriteRenderer batSprite;
+    Animator animator;
     Vector4 colorStorage;
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,8 @@ public class BatController : MonoBehaviour
         currentHealth = maxHealth;
         batSprite = GetComponent<SpriteRenderer>();
         colorStorage = batSprite.color;
+        statusHandler = FindObjectOfType<StatusEffectController>();
+        animator = transform.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,6 +69,7 @@ public class BatController : MonoBehaviour
         {
             moveDirection.y = -1 * (charPos.y - batPos.y);
         }
+        animator.SetFloat("LookX", moveDirection.x);
         moveDirection.Normalize();
 
         //Handles invincibility time when hit by player
