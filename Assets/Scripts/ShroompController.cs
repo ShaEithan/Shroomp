@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class ShroompController : MonoBehaviour
 {
@@ -17,8 +19,15 @@ public class ShroompController : MonoBehaviour
     private float grabTimer = -1f; 
     //int isJumping = 0;
     Rigidbody2D rigidbody2d;
-
+    
+    //Audio Stuff
+    AudioSource audioSource;
+    public AudioClip hurt;
+    public AudioClip dead;
     public ParticleSystem impactEffect;
+
+    //CameraStuff
+    private CinemachineVirtualCamera mainCamera;
 
     bool isGrounded;
     bool isTouchingLeft, isTouchingRight, isTouchingUp;
@@ -43,7 +52,7 @@ public class ShroompController : MonoBehaviour
 
     [SerializeField]
     private int maxHealth = 5;
-    private int currentHealth =5;
+    private int currentHealth;
     private float timeInvincible = 2.0f;
 
     bool isInvincible;
@@ -65,6 +74,7 @@ public class ShroompController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResumeGame();
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         ShroompSpriteT = GameObject.Find("ShroompSprite").GetComponent<Transform>();
@@ -72,6 +82,10 @@ public class ShroompController : MonoBehaviour
         healthCanvasPos = GameObject.Find("CanvasHealth").GetComponent<Transform>();
         rangeCircle = GameObject.Find("RangeCircle").GetComponent<Transform>();
         rectile = GameObject.Find("Reticle").GetComponent<Transform>();
+
+        audioSource = GetComponent<AudioSource>();
+        mainCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -108,6 +122,7 @@ public class ShroompController : MonoBehaviour
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
         }
+        if (Time.timeScale == 1)
         animator.SetFloat("Look X", lookDirection.x);
         animator.SetFloat("Look Y", 0);
         animator.SetFloat("Speed", move.magnitude);
@@ -269,7 +284,10 @@ public class ShroompController : MonoBehaviour
         rectile.transform.localPosition = new Vector2((mouseDirection.x * dashPower) *dashTime, (mouseDirection.y * dashPower) * dashTime);
         //Code for rotation the circle
         rangeCircle.transform.Rotate(0, 0, -8 * Time.deltaTime);
-        
+
+
+        if (isDead)
+            deathScene();
     }
     void FixedUpdate()
     {
@@ -376,13 +394,60 @@ public class ShroompController : MonoBehaviour
     {
         if (amount < 0)
         {
+
             if (isInvincible)
                 return;
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
         }
-
+        animator.SetTrigger("Hurt");
+        audioSource.PlayOneShot(hurt);
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        if (currentHealth ==0)
+        {
+            isDead = true;
+            deathDelayTime = deathDelaySetter;
+            mainCamera.m_Lens.OrthographicSize = 0.75f;
+        }
+        
+    }
+    public float deathDelaySetter = 3f;
+    private float deathDelayTime;
+    private bool isDead = false;
+    private int deathLoop = 0;
+    private bool deathplayed = false;
+    private float deathTransitionTime;
+    void deathScene()
+    {
+        if (deathLoop == 0)
+        {
+            //GameObject.Find("DeathBackground").GetComponent<Transform>().gameObject.SetActive(true);
+           PauseGame();
+            animator.speed = 0;
+        }
+        if(deathDelayTime<0 && !deathplayed)
+        {
+            animator.speed = 1;
+            animator.SetTrigger("Dead");
+            audioSource.PlayOneShot(dead);
+            deathplayed = true;
+            deathTransitionTime = 3f;
+        }
+        if(deathTransitionTime <0 && deathplayed)
+        {
+            SceneManager.LoadScene("StartScreen");
+        }
+        deathDelayTime -= Time.unscaledDeltaTime;
+        deathTransitionTime -= Time.unscaledDeltaTime;
+        deathLoop = 1;
+    }
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 }
