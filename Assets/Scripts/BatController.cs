@@ -97,28 +97,38 @@ public class BatController : MonoBehaviour
             }
         }
     }
-    void OnTriggerStay2D(Collider2D collision)
+    private bool hitOnce;
+    public int bombDamage =20;
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger");
-        ShroompController player = collision.gameObject.GetComponent<ShroompController>();
-
-        if(player != null && !player.isDashing)
+        Debug.Log("Bat Collided With " + collision.tag);
+        //hitOnce = false;
+        if (collision.gameObject.CompareTag("Player"))
         {
-            player.ChangeHealth(-1);
-        }
-        if(player.isDashing && !isInvincible)
-        {
-            
-            invincibleTime = 0.2f;
-            isInvincible = true;
-            ChangeHealth(-1);
-            if (currentHealth > 0)
+            ShroompController player = collision.gameObject.GetComponent<ShroompController>();
+            if (player != null && !player.isDashing)
             {
-                dotTime = statusHandler.getDotTime();
-                dotActive = true;
+                player.ChangeHealth(-1);
+            }
+            if (player.isDashing && !isInvincible)
+            {
 
+                invincibleTime = 0.2f;
+                isInvincible = true;
+                ChangeHealth(-1);
+                if (currentHealth > 0)
+                {
+                    dotTime = statusHandler.getDotTime();
+                    dotActive = true;
+
+                }
             }
         }
+        if (collision.gameObject.CompareTag("Bomb"))
+        {
+            ChangeHealth(-bombDamage);
+        }
+
     }
     public void ChangeHealth(int amount)
     {

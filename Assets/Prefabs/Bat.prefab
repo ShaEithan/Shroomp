@@ -378,6 +378,7 @@ MonoBehaviour:
   maxVelocity: 6
   fireWeakness: 2
   iceWeakness: 5
+  bombDamage: 20
   colorChangeSetter: 0.1
 --- !u!50 &7083550307646826473
 Rigidbody2D:

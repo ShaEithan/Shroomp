@@ -20,7 +20,7 @@ public class PowerUp : MonoBehaviour
     void Update()
     {
     }
-    void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Power Up collected");
         sendPowerUpStatus();

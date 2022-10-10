@@ -71,6 +71,9 @@ public class ShroompController : MonoBehaviour
     private bool isWallGrab = false;
     private bool canWallJump;
     private bool lastSideJumped; // True is Left, False is Right, used to remember last side of wall jumped
+
+    //Status stuff
+    StatusEffectController statusHandler;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,7 +89,8 @@ public class ShroompController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         mainCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         currentHealth = maxHealth;
-    }
+        statusHandler = FindObjectOfType<StatusEffectController>();
+}
 
     // Update is called once per frame
     void Update()
@@ -172,6 +176,8 @@ public class ShroompController : MonoBehaviour
             //Set gravit to 0 for dashing
             rigidbody2d.gravityScale = 0;
             dashingTimer = dashTime;
+            //Calls Bomb for powerup stuff
+            bomb();
         }
         //A jump can happen as long as you are in the ground, and aren't grabbing a wall
         else if (Input.GetKeyDown("space") && isGrounded == true && !isWallGrab)
@@ -441,6 +447,14 @@ public class ShroompController : MonoBehaviour
         deathDelayTime -= Time.unscaledDeltaTime;
         deathTransitionTime -= Time.unscaledDeltaTime;
         deathLoop = 1;
+    }
+
+    public GameObject bombPrefab;
+ 
+    private void bomb()
+    {
+        if(statusHandler.bombUp)
+        Instantiate(bombPrefab).GetComponent<Transform>().position = new Vector2(rigidbody2d.position.x, rigidbody2d.position.y);
     }
     void PauseGame()
     {

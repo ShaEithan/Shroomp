@@ -787,7 +787,7 @@ Transform:
   - {fileID: 1249046445}
   - {fileID: 184269831}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1112319514929670659
 SpriteRenderer:
@@ -938,6 +938,7 @@ MonoBehaviour:
   maxHealth: 5
   testX: 1
   deathDelaySetter: 1
+  bombPrefab: {fileID: 8497674627092417956, guid: 08151c74b41e43a40ac4f4eb78166181, type: 3}
 --- !u!95 &7352362289519744018
 Animator:
   serializedVersion: 4
