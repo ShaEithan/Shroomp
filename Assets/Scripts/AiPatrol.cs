@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class AiPatrol : MonoBehaviour
 {
@@ -29,20 +30,63 @@ public class AiPatrol : MonoBehaviour
     Vector4 colorStorage;
 
     SpriteRenderer frogSprite;
+
+
+
+    [Header("Pathfinding")]
+    public Transform target;
+    public float activateDistance = 25f;
+    public float pathUpdate = 0.5f;
+
+    public float nextWaypointDistance = 3f;
+    public float jumpNodeHeight = 0.8f;
+    public float jumpModifier = 0.3f;
+    public float jumpCheck = 0.1f;
+
+    public bool followEndable = true;
+    public bool jumpEnabled = true;
+    public bool directionLookEnabled = true;
+
+    private Path path;
+    private int currentWaypoint = 0;
+    bool isGrounded = false;
+    Seeker seeker;
+    private Vector2 currentVelocity;
+
+    [Header("not Pathfinding")]
+    private bool hitOnce;
+    public int bombDamage = 20;
+    private float colorChangeDelay;
+    public float colorChangeSetter = 0.1f;
+    private bool isColorChanging = true;
+
+
+
+
+
+
     void Start()
     {
+        walkSpeed = maxVelocity;
+        seeker = GetComponent<Seeker>();
         mustPatrol = true;
         currentHealth = maxHealth;
         frogSprite = GetComponent<SpriteRenderer>();
         colorStorage = frogSprite.color;
         statusHandler = FindObjectOfType<StatusEffectController>();
+        
+        InvokeRepeating("UpdatePath", 0f, pathUpdate);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("changing health new health " + currentHealth);
-        if (mustPatrol)
+
+        if (TargetInDistance() && followEndable)
+        {
+            PathFollow();
+        }
+        else 
         {
             Patrol();
         }
@@ -51,11 +95,92 @@ public class AiPatrol : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (mustPatrol)
         {
             mustTurn = !Physics2D.OverlapCircle(groundCheckPos.position, 0.1f, groundLayer);
         }
     }
+
+    private void UpdatePath()
+    {
+        if(followEndable && TargetInDistance() && seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        }
+    }
+
+    private void PathFollow()
+    {
+        Debug.Log("atrted path");
+        if (path == null)
+        {
+            Debug.Log("127");
+            return;
+        }
+
+        // Reached end of path
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            Debug.Log("134");
+            return;
+        }
+
+        // See if colliding with anything
+        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheck);
+        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+
+        // Direction Calculation
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        Vector2 force = direction * walkSpeed * Time.deltaTime;
+
+        // Jump
+        if (jumpEnabled && isGrounded)
+        {
+            if (direction.y > jumpNodeHeight)
+            {
+                rb.AddForce(Vector2.up * walkSpeed * jumpModifier);
+            }
+        }
+
+        // Movement
+        rb.AddForce(force);
+
+        // Next Waypoint
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+        if (distance < nextWaypointDistance)
+        {
+            currentWaypoint++;
+        }
+
+        // Direction Graphics Handling
+        if (directionLookEnabled)
+        {
+            if (rb.velocity.x > 0.05f)
+            {
+                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if (rb.velocity.x < -0.05f)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
+    }
+
+    private bool TargetInDistance()
+    {
+        return Vector2.Distance(transform.position, target.transform.position) < activateDistance;
+    }
+
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            path = p;
+            currentWaypoint = 0;
+        }
+    }
+
 
     void Patrol()
     {
@@ -74,8 +199,7 @@ public class AiPatrol : MonoBehaviour
         mustPatrol = true;
     }
 
-    private bool hitOnce;
-    public int bombDamage = 20;
+
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -116,10 +240,7 @@ public class AiPatrol : MonoBehaviour
             Destroy(transform.gameObject);
     }
 
-    private float colorChangeDelay;
-    public float colorChangeSetter = 0.1f;
-    private bool isColorChanging = true;
-
+    
     void dotHandler()
     {
         if (dotActive && !dotIsInvul)
