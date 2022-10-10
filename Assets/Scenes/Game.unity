@@ -47328,6 +47328,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 309117481900552809, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309117481900552809, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 309117481900552811, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_RootOrder
       value: 8
