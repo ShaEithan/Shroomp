@@ -64,10 +64,8 @@ public class AiPatrol : MonoBehaviour
 
 
 
-
     void Start()
     {
-        walkSpeed = maxVelocity;
         seeker = GetComponent<Seeker>();
         mustPatrol = true;
         currentHealth = maxHealth;
@@ -99,6 +97,10 @@ public class AiPatrol : MonoBehaviour
         if (mustPatrol)
         {
             mustTurn = !Physics2D.OverlapCircle(groundCheckPos.position, 0.1f, groundLayer);
+            if (rb.velocity.magnitude > maxVelocity)
+            {
+                rb.velocity = rb.velocity.normalized * maxVelocity;
+            }
         }
     }
 
@@ -195,7 +197,7 @@ public class AiPatrol : MonoBehaviour
     {
         mustPatrol = false;
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-        walkSpeed *= -1;
+        //walkSpeed *= -1;
         mustPatrol = true;
     }
 

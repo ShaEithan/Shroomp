@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 309117481900552808}
   - component: {fileID: 309117481900552814}
   - component: {fileID: 309117481900552815}
-  m_Layer: 8
+  - component: {fileID: 920418415}
+  m_Layer: 11
   m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 309117482670437350}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &309117481900552810
 SpriteRenderer:
@@ -101,14 +102,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc128433ba076b428f140bbc81b13b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 125
-  maxHealth: 5
+  walkSpeed: 480
+  maxHealth: 100
   mustPatrol: 0
   rb: {fileID: 309117481900552808}
   groundCheckPos: {fileID: 309117482670437350}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dotInvulSetter: 0.5
+  fireWeakness: 1
+  iceWeakness: 1
+  maxVelocity: 6
+  target: {fileID: 0}
+  activateDistance: 25
+  pathUpdate: 0.5
+  nextWaypointDistance: 3
+  jumpNodeHeight: 0.8
+  jumpModifier: 0.3
+  jumpCheck: 0.1
+  followEndable: 1
+  jumpEnabled: 1
+  directionLookEnabled: 1
+  bombDamage: 20
+  colorChangeSetter: 0.1
 --- !u!50 &309117481900552808
 Rigidbody2D:
   serializedVersion: 4
@@ -182,6 +199,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7428572, y: 1.8285714}
   m_EdgeRadius: 0
+--- !u!114 &920418415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309117481900552807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 1
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &309117482670437345
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309117482670437350}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
