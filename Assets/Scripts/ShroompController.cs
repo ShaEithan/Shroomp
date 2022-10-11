@@ -74,10 +74,11 @@ public class ShroompController : MonoBehaviour
 
     //Status stuff
     StatusEffectController statusHandler;
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
+       Cursor.visible = false;
         ResumeGame();
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();

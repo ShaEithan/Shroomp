@@ -10,7 +10,7 @@ public class SimpleInventory : MonoBehaviour
 
     int x = 0;
     int y = 0;
-    float itemOffset = 30f;
+    public float itemOffset = 60f;
     RectTransform defaultPos;
     // Start is called before the first frame update
     private void Awake()

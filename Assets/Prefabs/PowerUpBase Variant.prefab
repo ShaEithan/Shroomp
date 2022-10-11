@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 8584516651307182704, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fe253e916b5714c4bb65e7d8315f35a6, type: 3}
+      objectReference: {fileID: 561425823, guid: 1af520d962cd7d746976a99e216411c4, type: 3}
     - target: {fileID: 8584516651307182705, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: bombUp
       value: 1
@@ -19,6 +19,18 @@ PrefabInstance:
     - target: {fileID: 8584516651307182706, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182706, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182706, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182706, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8584516651307182706, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,9 +72,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182707, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182707, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8584516651307182710, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_Name
-      value: PowerUpBase
+      value: PowerUpBase Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

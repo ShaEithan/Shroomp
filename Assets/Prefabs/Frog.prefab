@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 480
-  maxHealth: 100
+  maxHealth: 200
   mustPatrol: 0
   rb: {fileID: 309117481900552808}
   groundCheckPos: {fileID: 309117482670437350}
