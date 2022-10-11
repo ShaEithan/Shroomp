@@ -77,6 +77,7 @@ public class ShroompController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         ResumeGame();
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -166,7 +167,7 @@ public class ShroompController : MonoBehaviour
         }
 
         //A dash will happen as long as you aren't in the process of a wall jump, or are grounded
-        if (Input.GetKeyDown("space") && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
+        if (Input.GetMouseButtonDown(0) && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
         {
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
