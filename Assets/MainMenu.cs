@@ -15,4 +15,9 @@ public class MainMenu : MonoBehaviour
         Debug.Log("QUIT!");
         Application.Quit();
     }
+
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
 }

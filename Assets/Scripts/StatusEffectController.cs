@@ -10,6 +10,7 @@ public class StatusEffectController : MonoBehaviour
     public bool fireUp = true;
     public bool iceUp = true;
     public bool bombUp;
+    public bool bDashUp;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +21,12 @@ public class StatusEffectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!(fireUp || iceUp || bombUp))
+        if (!(fireUp || iceUp || bombUp||bDashUp))
         {
             DOT = 0f;
         }
         else { DOT = 10f; }
-        Debug.Log("Fire is: " + fireUp + " Ice is: " + iceUp + " Bomb is: " + bombUp);
+        //Debug.Log("Fire is: " + fireUp + " Ice is: " + iceUp + " Bomb is: " + bombUp);
     }
 
     public float getDotTime()

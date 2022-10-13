@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour
     public bool fireUp = false;
     public bool iceUp = false;
     public bool bombUp = false;
+    public bool bDashUp = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,20 @@ public class PowerUp : MonoBehaviour
     {
         Debug.Log("Power Up collected");
         sendPowerUpStatus();
-        inventory.addItem(transform.GetComponent<SpriteRenderer>());
+        //inventory.addItem(transform.GetComponent<SpriteRenderer>());
+        sendToInv();
         Destroy(transform.gameObject);
+    }
+    private void sendToInv()
+    {
+        if (fireUp)
+            inventory.addItem("fireUp");
+        if (iceUp)
+            inventory.addItem("iceUp");
+        if (bombUp)
+            inventory.addItem("bombUp");
+        if (bDashUp)
+            inventory.addItem("bDashUp");
     }
     void sendPowerUpStatus()
     {
@@ -40,6 +53,10 @@ public class PowerUp : MonoBehaviour
         if (bombUp)
         {
             Status.bombUp = bombUp;
+        }
+        if (bDashUp)
+        {
+            Status.bDashUp = bDashUp;
         }
     }
 }

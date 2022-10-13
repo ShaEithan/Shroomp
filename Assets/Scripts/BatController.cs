@@ -35,6 +35,7 @@ public class BatController : MonoBehaviour
     SpriteRenderer batSprite;
     Animator animator;
     Vector4 colorStorage;
+    ShroompController player;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,7 @@ public class BatController : MonoBehaviour
         colorStorage = batSprite.color;
         statusHandler = FindObjectOfType<StatusEffectController>();
         animator = transform.GetComponent<Animator>();
+        player = FindObjectOfType<ShroompController>();
     }
 
     // Update is called once per frame
@@ -105,7 +107,7 @@ public class BatController : MonoBehaviour
         //hitOnce = false;
         if (collision.gameObject.CompareTag("Player"))
         {
-            ShroompController player = collision.gameObject.GetComponent<ShroompController>();
+            //ShroompController player = collision.gameObject.GetComponent<ShroompController>();
             if (player != null && !player.isDashing)
             {
                 player.ChangeHealth(-1);
@@ -124,6 +126,8 @@ public class BatController : MonoBehaviour
                 }
             }
         }
+        if (collision.gameObject.CompareTag("PlayerShadow"))
+            ChangeHealth(-5);
         if (collision.gameObject.CompareTag("Bomb"))
         {
             ChangeHealth(-bombDamage);

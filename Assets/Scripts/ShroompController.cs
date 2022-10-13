@@ -75,6 +75,14 @@ public class ShroompController : MonoBehaviour
     //Status stuff
     StatusEffectController statusHandler;
 
+    //bDash power up stuff
+    private bool bDashQueue = false;
+    private List<float> bDashTime = new List<float>();
+    private List<float> bDashTimeDelay = new List<float>();
+    private List<float> tempdashSpriteDirection = new List<float>();
+    private List<float> tempPosX = new List<float>();
+    private List<float> tempPosY = new List<float>();
+    private float timeDif;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +106,7 @@ public class ShroompController : MonoBehaviour
     void Update()
     {
         wallGrabCheck();
+        if(Time.timeScale >0)
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         // Sets char origin
@@ -123,7 +132,7 @@ public class ShroompController : MonoBehaviour
         mouseDirection.Normalize();
 
         Vector2 move = new Vector2(direction.x, 0);
-        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f) )
         {
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
@@ -138,6 +147,7 @@ public class ShroompController : MonoBehaviour
 
             if (dashingTimer < 0)
             {
+                //Debug.Log("Dash END");
                 isDashing = false;
                 animator.SetBool("Dash", false);
                 animator.SetBool("Jumping", false);
@@ -170,9 +180,49 @@ public class ShroompController : MonoBehaviour
         //A dash will happen as long as you aren't in the process of a wall jump, or are grounded
         if (Input.GetMouseButtonDown(0) && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
         {
+            //bDash power up code triggered on end of dash
+            if (statusHandler.bDashUp)
+            {
+                timeDif = dashingTimer;
+                //Debug.Log("BDASH TRIGGERED");
+                //Temp storage of mouse location for bdash powerup
+                tempPosX.Add(mouseDirection.x);
+                tempPosY.Add(mouseDirection.y);
+                //Calculate angle trijectory angle for ghost image power up
+                if (mouseDirection.x * dashPower > 0)
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y *dashPower) / (mouseDirection.x * dashPower))) - 90 * -1);
+                else if (mouseDirection.x * dashPower < 0)
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y * dashPower) / (mouseDirection.x * dashPower))) - 90 * 1);
+                else if (mouseDirection.x * dashPower == 0)
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y * dashPower) / (mouseDirection.x * dashPower))) - 90);
+                //Calculate angle trijectory angle
+                /**
+                else if (rigidbody2d.velocity.x < 0)
+                {
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90 * 1);
+                }
+                else if (rigidbody2d.velocity.x == 0)
+                {
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((-rigidbody2d.velocity.y) / -rigidbody2d.velocity.x)) - 90);
+                }
+                **/
+                bDashTimeDelay.Add(dashTime);
+                /**
+                if (dashingTimer > 0)
+                {
+                    bDashTimeDelay[0] =0;
+                }
+                **/
+                bDashQueue = true;
+                //Debug.Log("1st Bdash?");
+                //Debug.Log("Count tempDashD: " + tempdashSpriteDirection.Count + " Count tempX: " + tempPosX.Count + " Count tempY: " + tempPosY.Count);
+            }
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
             rigidbody2d.velocity = new Vector2(mouseDirection.x * dashPower, mouseDirection.y * dashPower);
+
+
+
             dashes = dashes - 1;
             isDashing = true;
             //Set gravit to 0 for dashing
@@ -198,18 +248,22 @@ public class ShroompController : MonoBehaviour
             if (rigidbody2d.velocity.x > 0)
             {
                 dashSpriteDirection = (Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90;
+                //tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90*-1);
             }
             //Calculate angle trijectory angle
             else if (rigidbody2d.velocity.x < 0)
             {
                 dashSpriteDirection = (Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90 * -1;
+                //tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90 * 1);
             }
             else if (rigidbody2d.velocity.x == 0)
             {
                 dashSpriteDirection = (Mathf.Rad2Deg * Mathf.Atan((rigidbody2d.velocity.y) / rigidbody2d.velocity.x)) - 90;
+                //tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((-rigidbody2d.velocity.y) / -rigidbody2d.velocity.x)) - 90);
             }
             //ShroompSpriteT.rotation = Quaternion.Slerp(ShroompSpriteT.rotation, Quaternion.Euler(0, 0, dashSpriteDirection), 1);
             ShroompSpriteT.rotation = Quaternion.Euler(0, 0, dashSpriteDirection);
+
 
             //Code for impacts and particle effcts
             Vector2 impactVelocity = new Vector2(0, 0);
@@ -296,6 +350,8 @@ public class ShroompController : MonoBehaviour
 
         if (isDead)
             deathScene();
+        if (statusHandler.bDashUp && bDashQueue)
+            bDash();
     }
     void FixedUpdate()
     {
@@ -444,6 +500,7 @@ public class ShroompController : MonoBehaviour
         }
         if(deathTransitionTime <0 && deathplayed)
         {
+            Cursor.visible = false;
             SceneManager.LoadScene("StartScreen");
         }
         deathDelayTime -= Time.unscaledDeltaTime;
@@ -457,6 +514,104 @@ public class ShroompController : MonoBehaviour
     {
         if(statusHandler.bombUp)
         Instantiate(bombPrefab).GetComponent<Transform>().position = new Vector2(rigidbody2d.position.x, rigidbody2d.position.y);
+    }
+    int token = 0;
+    private List<GameObject >tempHolder = new List<GameObject>();
+    public Sprite dashSprite;
+    private void bDash()
+    {
+
+        if (bDashTimeDelay.Count > 0)
+        {
+            for (var i = 0; i < bDashTimeDelay.Count; i++)
+            {
+                if (bDashTimeDelay[i] > 0)
+                {
+                    //Debug.Log(bDelay + "what is this");
+                    bDashTimeDelay[i] -= Time.deltaTime;
+
+                }
+                if (bDashTimeDelay.Count > 1)
+                {
+                    //Debug.Log("Delay Set to 0");
+                    bDashTimeDelay[0] = -1;
+                }
+                if (bDashTimeDelay[i] <= 0)
+                {
+                    //Debug.Log("Token Added");
+                    bDashTimeDelay.RemoveAt(0);
+                    token++;
+                }
+            }
+        }
+
+
+        if (token > 0)
+        {
+            //Create new object
+            GameObject bDashObject = new GameObject();
+            //Assign components
+            bDashObject.AddComponent(typeof(SpriteRenderer));
+            bDashObject.AddComponent(typeof(Rigidbody2D));
+            bDashObject.AddComponent(typeof(BoxCollider2D));
+            bDashObject.tag = "PlayerShadow";
+            bDashObject.layer = 7;
+            //Assign correct components from original shroomp
+            bDashObject.transform.GetComponent<Rigidbody2D>().position = transform.position;
+            bDashObject.GetComponent<BoxCollider2D>().size = transform.gameObject.GetComponent<BoxCollider2D>().size;
+            bDashObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            bDashObject.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
+            bDashObject.gameObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, tempdashSpriteDirection[0]);
+            tempdashSpriteDirection.RemoveAt(0);
+            bDashObject.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-tempPosX[0] * dashPower, -tempPosY[0] * dashPower);
+            tempPosX.RemoveAt(0);
+            tempPosY.RemoveAt(0);
+            bDashObject.GetComponent<SpriteRenderer>().sprite = dashSprite;
+            bDashObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+            //bDashTime = dashTime;
+            if (dashingTimer < dashTime)
+            {
+                //prob never gets called
+                bDashTime.Add(dashTime - dashingTimer);
+                //Debug.Log("Dash0Trigger");
+            }
+            else if (dashingTimer > 0)
+            {
+                bDashTime.Add(dashTime - timeDif);
+                //Debug.Log("Dash>0Trigger");
+            }
+            //Debug.Log("bDashTime timer added with value: " + (dashTime));
+            tempHolder.Add(bDashObject);
+            token--;
+            //Debug.Log("Token Removed");
+        }
+        if (bDashTime.Count > 0)
+        {
+            for (var i = 0; i < bDashTime.Count; i++)
+            {
+                //Debug.Log(bDashTime[i]);
+                if (bDashTime[i] > 0)
+                {
+                    bDashTime[i] -= Time.deltaTime;
+
+                }
+                if (bDashTime[i] == 0 || bDashTime[i] < 0)
+                {
+                    bDashTime.RemoveAt(i);
+                    //Debug.Log("Destroy attempt");
+                    GameObject.Destroy(tempHolder[i]);
+                    tempHolder.RemoveAt(i);
+                }
+            }
+        }
+        //Debug.Log("Bdash delay queue: " + bDashTimeDelay.Count + " Bdashtime queue: " + bDashTime.Count);
+        //Debug.Log(Mathf.Clamp(dashingTimer, 0, dashTime) + " Dashing timer");
+        /**
+        foreach (var item in bDashTime)
+        {
+            Debug.Log("Items in bdashtime: " + item);
+        }
+        **/
     }
     void PauseGame()
     {

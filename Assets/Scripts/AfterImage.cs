@@ -23,7 +23,7 @@ public class AfterImage : MonoBehaviour
     {
         SR = GetComponent<SpriteRenderer>();
         player = GameObject.Find("ShroompSprite").transform;
-        Debug.Log("Object found is: " + player);
+        //Debug.Log("Object found is: " + player);
         playerSR = player.GetComponent<SpriteRenderer>();
 
         alpha = alphaSet;
