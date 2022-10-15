@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 7083550307646826473}
   - component: {fileID: 7083550307646826472}
   - component: {fileID: -5461675850197702878}
+  - component: {fileID: 6949875387311779193}
   m_Layer: 8
   m_Name: Bat
   m_TagString: Untagged
@@ -304,7 +305,7 @@ Transform:
   - {fileID: 7083550306671731942}
   - {fileID: 138934673}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7083550307646826470
 SpriteRenderer:
@@ -447,3 +448,61 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6949875387311779193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083550307646826467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 9d2a1637cfab727f00000000
+  m_ShapePath:
+  - {x: -0.32196045, y: -0.13765144, z: 0}
+  - {x: -0.4222908, y: -0.042699575, z: 0}
+  - {x: -0.4824295, y: 0.069574594, z: 0}
+  - {x: -0.38095856, y: 0.108042, z: 0}
+  - {x: -0.24237442, y: 0.027808666, z: 0}
+  - {x: -0.16700363, y: 0.032671213, z: 0}
+  - {x: -0.15727997, y: 0.071572304, z: 0}
+  - {x: -0.22049332, y: 0.117767334, z: 0}
+  - {x: -0.26425552, y: 0.15909958, z: 0}
+  - {x: -0.24723816, y: 0.19800067, z: 0}
+  - {x: -0.14755249, y: 0.19313788, z: 0}
+  - {x: -0.038143158, y: 0.11290455, z: 0}
+  - {x: -0.016262054, y: 0.06914091, z: 0}
+  - {x: -0.008968353, y: 0.13964915, z: 0}
+  - {x: -0.047870636, y: 0.23203897, z: 0}
+  - {x: -0.023555756, y: 0.25878334, z: 0}
+  - {x: 0.046951294, y: 0.23447037, z: 0}
+  - {x: 0.10773468, y: 0.12019849, z: 0}
+  - {x: 0.13690948, y: 0.06184697, z: 0}
+  - {x: 0.15879059, y: 0.027808666, z: 0}
+  - {x: 0.22686768, y: 0.02294588, z: 0}
+  - {x: 0.3532982, y: 0.09102273, z: 0}
+  - {x: 0.40678787, y: 0.12506127, z: 0}
+  - {x: 0.47756958, y: 0.11333823, z: 0}
+  - {x: 0.4870186, y: 0.056984425, z: 0}
+  - {x: 0.45811844, y: -0.008791685, z: 0}
+  - {x: 0.38490295, y: -0.110776424, z: 0}
+  - {x: 0.3460045, y: -0.15940261, z: 0}
+  - {x: 0.23173141, y: -0.088894606, z: 0}
+  - {x: 0.15879059, y: -0.15210867, z: 0}
+  - {x: 0.059108734, y: -0.11563897, z: 0}
+  - {x: -0.05273056, y: -0.12536407, z: 0}
+  - {x: -0.10865402, y: -0.08646321, z: 0}
+  - {x: -0.18888474, y: -0.13752079, z: 0}
+  - {x: -0.24966812, y: -0.0986197, z: 0}
+  m_ShapePathHash: 1153051831
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 68804

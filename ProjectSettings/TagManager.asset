@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bomb
+  - PlayerShadow
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Particles
+    uniqueID: 924199581
+    locked: 0
+  - name: UI
+    uniqueID: 2138221519
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

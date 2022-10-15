@@ -24,7 +24,10 @@ public class ShroompController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip dead;
+    //ParticleStuff
     public ParticleSystem impactEffect;
+    public ParticleSystem iceEffect,fireEffect;
+    public TrailRenderer dashTrail;
 
     //CameraStuff
     private CinemachineVirtualCamera mainCamera;
@@ -352,6 +355,13 @@ public class ShroompController : MonoBehaviour
             deathScene();
         if (statusHandler.bDashUp && bDashQueue)
             bDash();
+        checkParticleStatus();
+
+        //trail render stuff
+        if (isDashing)
+            dashTrail.emitting = true;
+        if (!isDashing)
+            dashTrail.emitting = false;
     }
     void FixedUpdate()
     {
@@ -612,6 +622,25 @@ public class ShroompController : MonoBehaviour
             Debug.Log("Items in bdashtime: " + item);
         }
         **/
+    }
+    private void checkParticleStatus()
+    {
+        //Turn on section
+        if (statusHandler.fireUp)
+            fireEffect.Play();
+        if (statusHandler.iceUp)
+            iceEffect.Play();
+        //Turn off section
+        if (!statusHandler.fireUp)
+        {
+            fireEffect.Clear();
+            fireEffect.Pause();
+        }
+        if (!statusHandler.iceUp)
+        {
+            iceEffect.Clear();
+            iceEffect.Pause();
+        }
     }
     void PauseGame()
     {
