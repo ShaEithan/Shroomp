@@ -63,7 +63,7 @@ public class AiPatrol : MonoBehaviour
 
 
 
-
+    ShroompController player;
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -74,6 +74,7 @@ public class AiPatrol : MonoBehaviour
         statusHandler = FindObjectOfType<StatusEffectController>();
         
         InvokeRepeating("UpdatePath", 0f, pathUpdate);
+        player = FindObjectOfType<ShroompController>();
     }
 
     // Update is called once per frame
@@ -209,7 +210,6 @@ public class AiPatrol : MonoBehaviour
         //hitOnce = false;
         if (collision.gameObject.CompareTag("Player"))
         {
-            ShroompController player = collision.gameObject.GetComponent<ShroompController>();
             if (player != null && !player.isDashing)
             {
                 player.ChangeHealth(-1);
@@ -227,6 +227,8 @@ public class AiPatrol : MonoBehaviour
                 }
             }
         }
+        if (collision.gameObject.CompareTag("PlayerShadow"))
+            ChangeHealth(-5);
         if (collision.gameObject.CompareTag("Bomb"))
         {
             ChangeHealth(-bombDamage);
