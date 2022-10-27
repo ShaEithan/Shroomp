@@ -8,14 +8,13 @@ public class RoomTemplates : MonoBehaviour
     public GameObject[] topRooms;
     public GameObject[] leftRooms;
     public GameObject[] rightRooms;
-    public GameObject[] tBlocked, bBlocked, rBlocked, lBlocked;
-    public GameObject[] t_b_rBlocked, b_r_lBlocked, r_l_tBlocked, t_b_lBlocked;
-    public GameObject[] t_bBlocked, t_rBlocked, t_lBlocked, b_rBlocked, b_lBlocked, r_lBlocked;
     public GameObject closedRoom;
+    public GameObject blockT, blockB, blockL, blockR;
 
     public GameObject checker;
 
     public List<GameObject> rooms;
+    public List<GameObject> unsortedRooms, TRooms, BRooms, LRooms, RRooms;
 
     public float waitTime;
     private bool spawnedBoss;
@@ -32,5 +31,24 @@ public class RoomTemplates : MonoBehaviour
         {
             waitTime -= Time.deltaTime;
         }
+    }
+    private void Start()
+    {
+        foreach (var room in unsortedRooms)
+        {
+            if (room.name.Contains('T'))
+                TRooms.Add(room);
+            if (room.name.Contains('B'))
+                BRooms.Add(room);
+            if (room.name.Contains('L'))
+                LRooms.Add(room);
+            if (room.name.Contains('R'))
+                RRooms.Add(room);
+
+        }
+        Debug.Log("T room counts" + TRooms.Count);
+        Debug.Log("B room counts" + BRooms.Count);
+        Debug.Log("L room counts" + LRooms.Count);
+        Debug.Log("R room counts" + RRooms.Count);
     }
 }
