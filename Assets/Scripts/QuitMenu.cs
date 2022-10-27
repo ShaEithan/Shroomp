@@ -26,7 +26,7 @@ public class QuitMenu : MonoBehaviour
             transform.Find("Escape").gameObject.SetActive(false);
             transform.Find("QuitGame").gameObject.SetActive(false);
             escEnabled = false;
-            Cursor.visible = true;
+            Cursor.visible = false;
         }
         else if (Input.GetKeyUp(KeyCode.Escape) && !escEnabled)
         {
@@ -37,7 +37,7 @@ public class QuitMenu : MonoBehaviour
             transform.Find("QuitGame").gameObject.SetActive(true);
             escEnabled = true;
             Debug.Log("Esc open");
-            Cursor.visible = false;
+            Cursor.visible = true;
         }
     }
 }

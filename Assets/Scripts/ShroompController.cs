@@ -89,7 +89,7 @@ public class ShroompController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       Cursor.visible = false;
+        Cursor.visible = false;
         ResumeGame();
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -103,7 +103,7 @@ public class ShroompController : MonoBehaviour
         mainCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         currentHealth = maxHealth;
         statusHandler = FindObjectOfType<StatusEffectController>();
-}
+    }
 
     // Update is called once per frame
     void Update()
@@ -362,6 +362,12 @@ public class ShroompController : MonoBehaviour
             dashTrail.emitting = true;
         if (!isDashing)
             dashTrail.emitting = false;
+
+        //collider checker for sides
+        isGrounded = groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingLeft = leftCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingRight = rightCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingUp = upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
     }
     void FixedUpdate()
     {
@@ -371,13 +377,26 @@ public class ShroompController : MonoBehaviour
         {
             rigidbody2d.velocity = new Vector2(direction.x * speed * Time.deltaTime, rigidbody2d.velocity.y);
         }
-
+        /**
+         * Old shroomp overlap checker for blocks
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
         isTouchingLeft = Physics2D.OverlapCircle(leftCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
         isTouchingRight = Physics2D.OverlapCircle(rightCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
         isTouchingUp = Physics2D.OverlapCircle(upCheck.position, checkRadius, LayerMask.GetMask("Blocks"));
+        **/
+        /** New checker,doing checks in normal Update() for more consitency with wall grabs, 
+         * can be swapped back here if needed
+        isGrounded = groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingLeft = leftCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingRight = rightCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        isTouchingUp = upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
         
-
+        Debug info for wall grabs left here if needed later
+        Debug.Log("WallGrabDEBUG: " + "IsWallGrab Status: " + isWallGrab
+            + " Gravity Scale is: " + rigidbody2d.gravityScale + " canWallJump Status: " + canWallJump
+            + " Isgrounded: " + isGrounded + " grabTimer: " + grabTimer
+            + " Is touching left?: " + isTouchingLeft + " Is touching right?: " + isTouchingRight);
+        **/
     }
     void dashingEffect()
     {
@@ -415,7 +434,6 @@ public class ShroompController : MonoBehaviour
 
 
             }
-            
             if (isTouchingLeft && Input.GetKeyDown("space") && isWallGrab && grabTimer < 0)
             {
                 rigidbody2d.gravityScale = 1;
@@ -461,6 +479,13 @@ public class ShroompController : MonoBehaviour
                 impactEffect.transform.rotation = Quaternion.Euler(0, -90, -90);
                 impactEffect.Play();
             }
+        }
+        //Fix for stuck on wall, resets to normal
+        if(isWallGrab && canWallJump && !isTouchingRight && !isTouchingLeft)
+        {
+            isWallGrab = false;
+            canWallJump = false;
+            rigidbody2d.gravityScale = 1;
         }
         
     }
@@ -510,7 +535,7 @@ public class ShroompController : MonoBehaviour
         }
         if(deathTransitionTime <0 && deathplayed)
         {
-            Cursor.visible = false;
+            Cursor.visible = true;
             SceneManager.LoadScene("StartScreen");
         }
         deathDelayTime -= Time.unscaledDeltaTime;
