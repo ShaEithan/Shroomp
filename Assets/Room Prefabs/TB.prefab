@@ -818,8 +818,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &7409375991810151998
 MonoBehaviour:
@@ -834,7 +834,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 2
-  isChecker: 0
   waitTime: 4
 --- !u!1 &5837382667625827912
 GameObject:
@@ -1007,8 +1006,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &6677726236091081914
 MonoBehaviour:
@@ -1023,7 +1022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 1
-  isChecker: 0
   waitTime: 4
 --- !u!1 &7026680522742892682
 GameObject:
@@ -1036,7 +1034,7 @@ GameObject:
   - component: {fileID: 8864981608184910506}
   - component: {fileID: 3423340935874678867}
   - component: {fileID: 5006661590994995447}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RoomCore
   m_TagString: RoomCore
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -1102,6 +1100,6 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0

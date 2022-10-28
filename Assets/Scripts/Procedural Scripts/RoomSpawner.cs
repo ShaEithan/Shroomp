@@ -13,18 +13,35 @@ public class RoomSpawner : MonoBehaviour
     private int rand;
     private bool spawned = false;
     private bool deadEnd = true;
-    public float waitTime = 4f;
+    public float waitTime = 10f;
+    private float triggerDelay = 0f;
     void Start()
     {
-        Destroy(gameObject, waitTime);
+        //Destroy(gameObject, waitTime);
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        Invoke("Spawn", 0.1f);
+        //Check for room core and fill walls as needed
+
+
+        Invoke("Spawn", 0.2f);
+    }
+    private bool fixedUpdateRan = false;
+    private void FixedUpdate()
+    {
+            //Debug.Log(transform.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("RoomCore")));
+            if (transform.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("RoomCore")))
+            {
+                hasRoom = true;
+            //fixedUpdateRan = true;
+            //Debug.Log(triggerDelay);
+            spawned = true;
+            }
+        triggerDelay += Time.deltaTime;
     }
     void Spawn()
     {
 
         //Spawn Rooms
-        if (spawned == false && deadEnd)
+        if (spawned == false && deadEnd && !hasRoom)
         {
             if (openingDirection == 1)
             {
@@ -51,57 +68,97 @@ public class RoomSpawner : MonoBehaviour
                 Instantiate(templates.RRooms[rand], transform.position, templates.RRooms[rand].transform.rotation);
             }
             spawned = true;
+            Destroy(gameObject);
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    private bool hasRoom = false;
+    void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("RoomCore"))
+        //Debug.Log(triggerDelay > 1);
+        if (triggerDelay > 0.1)
         {
-            Debug.Log("Room core name is: " + collision.transform.root.name);
-            if (openingDirection == 1 && collision.transform.root.name.Contains('B'))
-                deadEnd = false;
-            if (openingDirection == 2 && collision.transform.root.name.Contains('T'))
-                deadEnd = false;
-            if (openingDirection == 3 && collision.transform.root.name.Contains('L'))
-                deadEnd = false;
-            if (openingDirection == 4 && collision.transform.root.name.Contains('R'))
-                deadEnd = false;
-            Debug.Log("Room core spawned = " + deadEnd);
-            if (deadEnd)
+
+                Debug.Log("Collision: " + collision);
+
+            if (hasRoom && collision.CompareTag("RoomCore"))
             {
-                if (openingDirection == 1)
-                    Instantiate(templates.blockT, transform.parent.position, Quaternion.identity);
-                if (openingDirection == 2)
-                    Instantiate(templates.blockB, transform.parent.position, Quaternion.identity);
-                if (openingDirection == 3)
-                    Instantiate(templates.blockR, transform.parent.position, Quaternion.identity);
-                if (openingDirection == 4)
-                    Instantiate(templates.blockL, transform.parent.position, Quaternion.identity);
+                spawned = true;
+                Debug.Log("Room core name is: " + collision.transform.root.name);
+                Debug.Log("Opening direction is: " + openingDirection);
+                if (openingDirection == 1 && collision.transform.root.name.Contains('B'))
+                    deadEnd = false;
+                if (openingDirection == 2 && collision.transform.root.name.Contains('T'))
+                    deadEnd = false;
+                if (openingDirection == 3 && collision.transform.root.name.Contains('L'))
+                    deadEnd = false;
+                if (openingDirection == 4 && collision.transform.root.name.Contains('R'))
+                    deadEnd = false;
+                Debug.Log("deadEnd = " + deadEnd);
+                if (!deadEnd)
+                    Debug.Log("Roomcore collided with is: " + collision);
+                //Normal door handler
+                if (deadEnd)
+                {
+                    Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!Dead end created for: " + openingDirection);
+                    if (openingDirection == 1)
+                        Instantiate(templates.blockT, transform.position - new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+                    if (openingDirection == 2)
+                        Instantiate(templates.blockB, transform.position + new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+                    if (openingDirection == 3)
+                        Instantiate(templates.blockR, transform.position - new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+                    if (openingDirection == 4)
+                        Instantiate(templates.blockL, transform.position + new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+
+                }
+
                 Destroy(gameObject);
             }
-        }
 
-            if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && deadEnd)
+            if (collision.CompareTag("SpawnPoint") && !hasRoom && !spawned)
+            {
+                /**
+                if (collision.GetInstanceID() < transform.GetInstanceID())
+                {
+                    Destroy(gameObject);
+                }
+                **/
+                if (openingDirection == 1)
+                    Instantiate(templates.blockT, transform.position - new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+                if (openingDirection == 2)
+                    Instantiate(templates.blockB, transform.position + new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+                if (openingDirection == 3)
+                    Instantiate(templates.blockR, transform.position - new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+                if (openingDirection == 4)
+                    Instantiate(templates.blockL, transform.position + new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+                //Destroy(gameObject);
+                spawned = true;
+            }
+
+            /**
+            if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && !hasRoom)
             {
                 if (spawned == false)
                 {
-                    /**
+                    Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!Dead end created for: " + openingDirection);
+                    
                     Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                     Destroy(gameObject);
-                    **/
+                    
                     if (openingDirection == 1)
-                        Instantiate(templates.blockT, transform.parent.position, Quaternion.identity);
+                        Instantiate(templates.blockT, transform.position - new Vector3(0, 14, 0), Quaternion.identity, transform.root);
                     if (openingDirection == 2)
-                        Instantiate(templates.blockB, transform.parent.position, Quaternion.identity);
+                        Instantiate(templates.blockB, transform.position + new Vector3(0, 14, 0), Quaternion.identity, transform.root);
                     if (openingDirection == 3)
-                        Instantiate(templates.blockR, transform.parent.position, Quaternion.identity);
+                        Instantiate(templates.blockR, transform.position - new Vector3(14, 0, 0), Quaternion.identity, transform.root);
                     if (openingDirection == 4)
-                        Instantiate(templates.blockL, transform.parent.position, Quaternion.identity);
-                    //Destroy(gameObject);
+                        Instantiate(templates.blockL, transform.position + new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+                    Destroy(gameObject);
                 }
-            spawned = true;
+                spawned = true;
+                hasRoom = true;
+            }
+            **/
+            //Destroy(gameObject);
         }
-            
-        //Destroy(gameObject);
     }
 }

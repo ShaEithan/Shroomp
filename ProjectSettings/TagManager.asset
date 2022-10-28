@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Bomb
   - PlayerShadow
+  - SpawnPoint
+  - RoomCore
+  - MainRoom
+  - Rooms
+  - FutureRoomChecker
   layers:
   - Default
   - TransparentFX
@@ -19,7 +24,7 @@ TagManager:
   - PowerUps
   - Background
   - EnemiesWcollide
-  - 
+  - RoomCore
   - 
   - 
   - 

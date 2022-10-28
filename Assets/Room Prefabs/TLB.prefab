@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3637493007339655148}
   - component: {fileID: 5816225523879930971}
   - component: {fileID: 2964262235214288647}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: RoomCore
   m_TagString: RoomCore
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -77,8 +77,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &9151431459389160338
 GameObject:
@@ -158,8 +158,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &2198029023018677964
 MonoBehaviour:
@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 2
-  isChecker: 0
   waitTime: 4
 --- !u!1 &9151431459471480886
 GameObject:
@@ -254,8 +253,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &4971045882674393200
 MonoBehaviour:
@@ -270,7 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 4
-  isChecker: 0
   waitTime: 4
 --- !u!1 &9151431459672621668
 GameObject:
@@ -1027,7 +1025,7 @@ Transform:
   - {fileID: 9151431459471480885}
   - {fileID: 3637493007339655148}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3879327247621753727
 MonoBehaviour:
@@ -1119,8 +1117,8 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &303071852859654324
 MonoBehaviour:
@@ -1135,7 +1133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 1
-  isChecker: 0
   waitTime: 4
 --- !u!1 &9151431460607975068
 GameObject:
