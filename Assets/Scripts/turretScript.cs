@@ -63,8 +63,8 @@ public class turretScript : MonoBehaviour
 
     void Shoot()
     {
-        GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, Quaternion.identity);
-        BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+        //GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, transform.rotation * Quanternium.Euler(0f,0f,-90));
+        //BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
     }
 
     private void OnDrawGizmosSelected()
