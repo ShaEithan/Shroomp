@@ -173,7 +173,7 @@ public class ShroompController : MonoBehaviour
         else if (isGrounded == true)
         {
             dashes = dashAmmount;
-            Debug.Log("I am grounded");
+            //Debug.Log("I am grounded");
             animator.SetBool("Jumping", false);
             animator.SetBool("Dash", false);
             ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
