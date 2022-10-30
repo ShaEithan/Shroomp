@@ -26,6 +26,7 @@ public class AiPatrol : MonoBehaviour
     public int fireWeakness = 1;
     public int iceWeakness = 1;
     public float maxVelocity = 6;
+    public Transform groundCheck;
     private StatusEffectController statusHandler;
     Vector4 colorStorage;
 
@@ -49,7 +50,6 @@ public class AiPatrol : MonoBehaviour
 
     private Path path;
     private int currentWaypoint = 0;
-    bool isGrounded = false;
     Seeker seeker;
     private Vector2 currentVelocity;
 
@@ -60,7 +60,8 @@ public class AiPatrol : MonoBehaviour
     public float colorChangeSetter = 0.1f;
     private bool isColorChanging = true;
 
-
+    [Header("Debug")]
+    public bool isGrounded = false;
 
 
     ShroompController player;
@@ -75,6 +76,7 @@ public class AiPatrol : MonoBehaviour
         
         InvokeRepeating("UpdatePath", 0f, pathUpdate);
         player = FindObjectOfType<ShroompController>();
+        target = FindObjectOfType<ShroompController>().transform;
     }
 
     // Update is called once per frame
@@ -103,6 +105,9 @@ public class AiPatrol : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * maxVelocity;
             }
         }
+        //Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheck);
+        //isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.1f);
+        isGrounded = groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
     }
 
     private void UpdatePath()
@@ -130,8 +135,8 @@ public class AiPatrol : MonoBehaviour
         }
 
         // See if colliding with anything
-        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheck);
-        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+        //Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheck);
+        //isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
 
         // Direction Calculation
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;

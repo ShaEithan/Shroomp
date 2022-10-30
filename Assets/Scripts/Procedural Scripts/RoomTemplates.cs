@@ -19,6 +19,7 @@ public class RoomTemplates : MonoBehaviour
     public float waitTime;
     private bool spawnedBoss;
     public GameObject boss;
+    AstarPath pathFinder;
 
     void Update()
     {
@@ -26,6 +27,7 @@ public class RoomTemplates : MonoBehaviour
         {
             Instantiate(boss, rooms[rooms.Count - 1].transform.position, Quaternion.identity);
             spawnedBoss = true;
+            pathFinder.Scan();
         }
         else
         {
@@ -50,5 +52,6 @@ public class RoomTemplates : MonoBehaviour
         Debug.Log("B room counts" + BRooms.Count);
         Debug.Log("L room counts" + LRooms.Count);
         Debug.Log("R room counts" + RRooms.Count);
+        pathFinder = FindObjectOfType<AstarPath>();
     }
 }
