@@ -18,6 +18,8 @@ public class turretScript : MonoBehaviour
     float nextShot = 0;
     public Transform ShootPoint;
     public float Force;
+    public float rotationModifier;
+
     void Start()
     {
         
@@ -63,12 +65,18 @@ public class turretScript : MonoBehaviour
 
     void Shoot()
     {
-        //GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, transform.rotation * Quanternium.Euler(0f,0f,-90));
-        //BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+        float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg - rotationModifier;
+        GameObject BulletIns = Instantiate(Bullet, ShootPoint.position, transform.rotation * Quaternion.Euler(0f,0f,angle));
+        BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, Range);
+    }
+
+    public Vector2 GetDirectionVector2D(float angle)
+    {
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized;
     }
 }
