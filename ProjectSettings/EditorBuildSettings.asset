@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IntroCutScene.unity
     guid: 14e9c8ec5dd353645978410bea1cb881
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: f1c16c15267bc4ddb819871d1ec8f1c6
   m_configObjects: {}
