@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _HDR_Tint: {r: 38.937145, g: 38.937145, b: 38.937145, a: 0.42745098}
+    - _HDR_Tint: {r: 1.9766746, g: 1.9766746, b: 1.9766746, a: 0.42745098}
   m_BuildTextureStacks: []
 --- !u!114 &4776818955159274107
 MonoBehaviour:
