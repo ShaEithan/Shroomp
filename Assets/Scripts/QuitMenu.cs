@@ -7,6 +7,7 @@ public class QuitMenu : MonoBehaviour
 {
     public void toMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("StartScreen");
     }
 
