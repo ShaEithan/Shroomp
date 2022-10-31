@@ -364,10 +364,20 @@ public class ShroompController : MonoBehaviour
             dashTrail.emitting = false;
 
         //collider checker for sides
-        isGrounded = groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
-        isTouchingLeft = leftCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
-        isTouchingRight = rightCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
-        isTouchingUp = upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
+        if(groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")) || groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Platforms")))
+        isGrounded = true;
+        else isGrounded = false;
+
+        if (leftCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")))
+            isTouchingLeft = true;
+        else isTouchingLeft = false;
+
+        if (rightCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")))
+            isTouchingRight = true;
+        else isTouchingRight = false;
+        if (upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")))
+            isTouchingUp = true;
+        else isTouchingUp = false;
     }
     void FixedUpdate()
     {

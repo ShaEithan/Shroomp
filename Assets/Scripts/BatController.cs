@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+
 public class BatController : MonoBehaviour
 {
     //Status handle script
@@ -84,6 +86,8 @@ public class BatController : MonoBehaviour
 
         healthText.text = (currentHealth + " / " + maxHealth);
         dotHandler();
+        if (isdead)
+            Destroy(transform.gameObject);
     }
     private void FixedUpdate()
     {
@@ -118,6 +122,7 @@ public class BatController : MonoBehaviour
                 invincibleTime = 0.2f;
                 isInvincible = true;
                 ChangeHealth(-1);
+                animator.SetTrigger("Damage");
                 if (currentHealth > 0)
                 {
                     dotTime = statusHandler.getDotTime();
@@ -127,10 +132,14 @@ public class BatController : MonoBehaviour
             }
         }
         if (collision.gameObject.CompareTag("PlayerShadow"))
+        {
             ChangeHealth(-5);
+            animator.SetTrigger("Damage");
+        }
         if (collision.gameObject.CompareTag("Bomb"))
         {
             ChangeHealth(-bombDamage);
+            animator.SetTrigger("Damage");
         }
 
     }
@@ -138,8 +147,13 @@ public class BatController : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         if (currentHealth == 0)
-            Destroy(transform.gameObject);
+        {
+            animator.SetTrigger("Dead");
+        }
     }
+    [SerializeField]
+    private bool isdead = false;
+
     //Used to stop color overrieds from ice, sets a delay before a power up can alter color
     private float colorChangeDelay;
     public float colorChangeSetter = 0.1f;
@@ -157,6 +171,7 @@ public class BatController : MonoBehaviour
                 dotIsInvul = true;
                 colorChangeDelay = colorChangeSetter;
                 isColorChanging = true;
+                animator.SetTrigger("Damage");
             }
 
 
