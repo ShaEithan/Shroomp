@@ -364,7 +364,7 @@ public class ShroompController : MonoBehaviour
             dashTrail.emitting = false;
 
         //collider checker for sides
-        if(groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")) || groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("OneWay")))
+        if(groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")) || groundCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Platforms")))
         isGrounded = true;
         else isGrounded = false;
 
