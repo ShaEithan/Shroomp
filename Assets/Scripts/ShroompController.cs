@@ -55,14 +55,14 @@ public class ShroompController : MonoBehaviour
 
     [SerializeField]
     private int maxHealth = 5;
-    private int currentHealth;
+    public int currentHealth;
     private float timeInvincible = 2.0f;
 
     bool isInvincible;
     float invincibleTimer;
 
-    TextMeshProUGUI textHealth;
-    Transform healthCanvasPos;
+    //TextMeshProUGUI textHealth;
+    //Transform healthCanvasPos;
 
     //Circle rectile stuff
     Transform rangeCircle,rectile;
@@ -86,6 +86,9 @@ public class ShroompController : MonoBehaviour
     private List<float> tempPosX = new List<float>();
     private List<float> tempPosY = new List<float>();
     private float timeDif;
+
+    //Heart container stuff
+    HealthTracker healhTracker;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,8 +97,8 @@ public class ShroompController : MonoBehaviour
         animator = GameObject.Find("ShroompSprite").GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         ShroompSpriteT = GameObject.Find("ShroompSprite").GetComponent<Transform>();
-        textHealth = GameObject.Find("charHealthText").GetComponent<TMPro.TextMeshProUGUI>();
-        healthCanvasPos = GameObject.Find("CanvasHealth").GetComponent<Transform>();
+        //textHealth = GameObject.Find("charHealthText").GetComponent<TMPro.TextMeshProUGUI>();
+        //healthCanvasPos = GameObject.Find("CanvasHealth").GetComponent<Transform>();
         rangeCircle = GameObject.Find("RangeCircle").GetComponent<Transform>();
         rectile = GameObject.Find("Reticle").GetComponent<Transform>();
 
@@ -103,11 +106,18 @@ public class ShroompController : MonoBehaviour
         mainCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         currentHealth = maxHealth;
         statusHandler = FindObjectOfType<StatusEffectController>();
+        healhTracker = FindObjectOfType<HealthTracker>();
     }
-
+    int h = 0;
     // Update is called once per frame
     void Update()
     {
+        
+        if (h == 0)
+        {
+            healhTracker.createContainers();
+            h++;
+        }
         wallGrabCheck();
         if(Time.timeScale >0)
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -337,9 +347,10 @@ public class ShroompController : MonoBehaviour
                 isInvincible = false;
         }
         //Used to show health
+        /**
         textHealth.text = (currentHealth + " / " + maxHealth);
         healthCanvasPos.position = new Vector2(rigidbody2d.position.x, rigidbody2d.position.y + 0.5f);
-
+        **/
         //Range circle and rectile position code
         rangeOffset = ((dashPower * dashTime) * 0.13f);
         //recticleOffset = ((dashPower * dashTime) * (31f / 450f));
@@ -513,6 +524,7 @@ public class ShroompController : MonoBehaviour
         animator.SetTrigger("Hurt");
         audioSource.PlayOneShot(hurt);
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        healhTracker.createContainers();
         if (currentHealth ==0)
         {
             isDead = true;
