@@ -16,7 +16,7 @@ public class SkipIntro : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene("Tutorial");
         }
     }
 }
