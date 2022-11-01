@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 6991354221192327850}
   - component: {fileID: 6991354221192327851}
   - component: {fileID: 6991354221192327848}
+  - component: {fileID: 5358395186958560602}
   m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
@@ -256,7 +257,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -345,6 +346,33 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &5358395186958560602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991354221192327846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 9d2a1637cfab727f00000000
+  m_ShapePath:
+  - {x: -7.3526278, y: -2.123674, z: 0}
+  - {x: -7.294897, y: 2.0851393, z: 0}
+  - {x: -6.0313153, y: 2.0825622, z: 0}
+  - {x: -6.024413, y: -2.1376436, z: 0}
+  m_ShapePathHash: 1422357006
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 70568
 --- !u!1 &6991354221621383755
 GameObject:
   m_ObjectHideFlags: 0
