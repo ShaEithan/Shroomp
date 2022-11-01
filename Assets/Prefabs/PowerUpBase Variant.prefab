@@ -74,15 +74,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8584516651307182707, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 0.53333336
       objectReference: {fileID: 0}
     - target: {fileID: 8584516651307182707, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 0.53333336
       objectReference: {fileID: 0}
     - target: {fileID: 8584516651307182710, guid: d528997026320bd46ba5b87328876765, type: 3}
       propertyPath: m_Name
       value: PowerUpBase Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584516651307182710, guid: d528997026320bd46ba5b87328876765, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

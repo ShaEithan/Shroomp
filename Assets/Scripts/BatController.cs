@@ -143,6 +143,15 @@ public class BatController : MonoBehaviour
         }
 
     }
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("Particle collision detected with: " + other);
+        if (other.CompareTag("Bomb"))
+        {
+            ChangeHealth(-1);
+        }
+    }
+
     public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);

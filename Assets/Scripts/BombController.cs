@@ -6,7 +6,8 @@ public class BombController : MonoBehaviour
 {
     private float timeUntilExplode;
     public float timeUntilExplodeSetter = 4f;
-    public float timeUntilDestroySetter =2f;
+    public float timeUntilDestroySetter;
+    public bool startParticles = false;
     private float timeUntilDestroy;
     private bool hasExploded = false;
     Animator animator;
@@ -21,27 +22,28 @@ public class BombController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeUntilExplode -= Time.deltaTime;
-        timeUntilDestroy -= Time.deltaTime;
-        if (timeUntilExplode < 0 && !hasExploded)
-        {
-            Debug.Log("Time until explode is " + timeUntilExplode);
-            animator.SetTrigger("Explode");
-            boxCollider.enabled = true;
-            timeUntilDestroy = timeUntilDestroySetter;
-            hasExploded = true;
-        }
-        if (timeUntilDestroy < 0 && hasExploded)
+        timeUntilDestroy = timeUntilDestroySetter;
+
+        if (timeUntilDestroy < 0)
         {
             Debug.Log("Bomb Destroyed");
             Destroy(transform.gameObject);
         }
+        if (startParticles && !particleHasPlayed)
+            playParticle();
     }
     private void Awake()
     {
         timeUntilExplode = timeUntilExplodeSetter;
         hasExploded = false;
         timeUntilDestroy = 0;
+    }
+    private bool particleHasPlayed = false;
+    public void playParticle()
+    {
+        transform.GetChild(0).GetComponent<ParticleSystem>().Clear();
+        transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+        particleHasPlayed = true;
     }
 
 }
