@@ -24,7 +24,6 @@ public class ShroompController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip dead;
-    public AudioClip swoosh;
     //ParticleStuff
     public ParticleSystem impactEffect;
     public ParticleSystem iceEffect,fireEffect;
@@ -161,7 +160,6 @@ public class ShroompController : MonoBehaviour
 
             if (dashingTimer < 0)
             {
-                audioSource.PlayOneShot(swoosh, 0.25F);
                 //Debug.Log("Dash END");
                 isDashing = false;
                 animator.SetBool("Dash", false);
