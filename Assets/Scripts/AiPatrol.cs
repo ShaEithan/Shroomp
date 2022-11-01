@@ -117,7 +117,14 @@ public class AiPatrol : MonoBehaviour
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
     }
-
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("Particle collision detected with: " + other);
+        if (other.CompareTag("Bomb"))
+        {
+            ChangeHealth(-1);
+        }
+    }
     private void PathFollow()
     {
         Debug.Log("atrted path");
@@ -240,13 +247,20 @@ public class AiPatrol : MonoBehaviour
         }
 
     }
-
+    private bool stopDeadRepeat = false;
     public void ChangeHealth(int amount)
     {
         
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         if (currentHealth == 0)
-            Destroy(transform.gameObject);
+        {
+            if (!stopDeadRepeat)
+            {
+                FindObjectOfType<RandomCoinSpawner>().spawnRandom(transform);
+                Destroy(transform.gameObject);
+                stopDeadRepeat = true;
+            }
+        }
     }
 
     

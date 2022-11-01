@@ -151,13 +151,18 @@ public class BatController : MonoBehaviour
             ChangeHealth(-1);
         }
     }
-
+    private bool stopDeadRepeat = false;
     public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         if (currentHealth == 0)
         {
-            animator.SetTrigger("Dead");
+            if (!stopDeadRepeat)
+            {
+                FindObjectOfType<RandomCoinSpawner>().spawnRandom(transform);
+                animator.SetTrigger("Dead");
+                stopDeadRepeat = true;
+            }
         }
     }
     [SerializeField]
