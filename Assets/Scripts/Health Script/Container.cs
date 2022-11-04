@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Container : MonoBehaviour
 {
@@ -10,9 +12,9 @@ public class Container : MonoBehaviour
     void Start()
     {
         if(count == 1)
-            transform.GetComponent<SpriteRenderer>().sprite = halfHeart;
+            transform.GetComponent<UnityEngine.UI.Image>().sprite = halfHeart;
         if (count == 2)
-            transform.GetComponent<SpriteRenderer>().sprite = fullHeart;
+            transform.GetComponent<UnityEngine.UI.Image>().sprite = fullHeart;
     }
 
     // Update is called once per frame

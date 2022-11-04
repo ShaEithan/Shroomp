@@ -10,6 +10,7 @@ public class PowerUp : MonoBehaviour
     public bool iceUp = false;
     public bool bombUp = false;
     public bool bDashUp = false;
+    public bool wideUp = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,8 @@ public class PowerUp : MonoBehaviour
             inventory.addItem("bombUp");
         if (bDashUp)
             inventory.addItem("bDashUp");
+        if (wideUp)
+            inventory.addItem("wideUp");
     }
     void sendPowerUpStatus()
     {
@@ -57,6 +60,10 @@ public class PowerUp : MonoBehaviour
         if (bDashUp)
         {
             Status.bDashUp = bDashUp;
+        }
+        if(wideUp)
+        {
+            Status.wideUp = wideUp;
         }
     }
 }

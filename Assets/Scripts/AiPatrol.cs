@@ -224,6 +224,7 @@ public class AiPatrol : MonoBehaviour
         {
             if (player != null && !player.isDashing)
             {
+
                 player.ChangeHealth(-1);
             }
             if (player.isDashing && !isInvincible)
@@ -231,7 +232,10 @@ public class AiPatrol : MonoBehaviour
 
                 invincibleTime = 0.2f;
                 isInvincible = true;
-                ChangeHealth(-1);
+                int damage = 10;
+                if (statusHandler.wideUp)
+                    damage = damage * 2;
+                ChangeHealth(-damage);
                 if (currentHealth > 0)
                 {
                     dotTime = statusHandler.getDotTime();

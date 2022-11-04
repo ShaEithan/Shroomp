@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using SpriteGlow;
 
 public class ShroompController : MonoBehaviour
 {
@@ -391,6 +392,13 @@ public class ShroompController : MonoBehaviour
         if (upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks")))
             isTouchingUp = true;
         else isTouchingUp = false;
+
+        //Wide power up
+        if (statusHandler.wideUp)
+            transform.localScale = new Vector3(2, 1, 1);
+        if (!statusHandler.wideUp)
+            transform.localScale = new Vector3(1, 1, 1);
+
     }
     void FixedUpdate()
     {
@@ -413,8 +421,9 @@ public class ShroompController : MonoBehaviour
         isTouchingLeft = leftCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
         isTouchingRight = rightCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
         isTouchingUp = upCheck.GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Blocks"));
-        
-        Debug info for wall grabs left here if needed later
+        **/
+        /**
+        //Debug info for wall grabs left here if needed later
         Debug.Log("WallGrabDEBUG: " + "IsWallGrab Status: " + isWallGrab
             + " Gravity Scale is: " + rigidbody2d.gravityScale + " canWallJump Status: " + canWallJump
             + " Isgrounded: " + isGrounded + " grabTimer: " + grabTimer
@@ -510,6 +519,12 @@ public class ShroompController : MonoBehaviour
             canWallJump = false;
             rigidbody2d.gravityScale = 1;
         }
+        if(isWallGrab && isGrounded)
+        {
+            isWallGrab = false;
+            canWallJump = false;
+            rigidbody2d.gravityScale = 1;
+        }
         
     }
     public void ChangeHealth(int amount)
@@ -568,6 +583,7 @@ public class ShroompController : MonoBehaviour
     }
 
     public GameObject bombPrefab;
+    public Material bDashMaterial;
  
     private void bomb()
     {
@@ -609,24 +625,35 @@ public class ShroompController : MonoBehaviour
         {
             //Create new object
             GameObject bDashObject = new GameObject();
+            bDashObject.transform.position = transform.position;
             //Assign components
+            //bDashObject.SetActive(false);
             bDashObject.AddComponent(typeof(SpriteRenderer));
             bDashObject.AddComponent(typeof(Rigidbody2D));
             bDashObject.AddComponent(typeof(BoxCollider2D));
+            bDashObject.AddComponent<SpriteGlowEffect>();
             bDashObject.tag = "PlayerShadow";
             bDashObject.layer = 7;
             //Assign correct components from original shroomp
-            bDashObject.transform.GetComponent<Rigidbody2D>().position = transform.position;
+            
             bDashObject.GetComponent<BoxCollider2D>().size = transform.gameObject.GetComponent<BoxCollider2D>().size;
             bDashObject.GetComponent<BoxCollider2D>().isTrigger = true;
             bDashObject.transform.GetComponent<Rigidbody2D>().gravityScale = 0;
             bDashObject.gameObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, tempdashSpriteDirection[0]);
             tempdashSpriteDirection.RemoveAt(0);
-            bDashObject.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-tempPosX[0] * dashPower, -tempPosY[0] * dashPower);
-            tempPosX.RemoveAt(0);
-            tempPosY.RemoveAt(0);
+
             bDashObject.GetComponent<SpriteRenderer>().sprite = dashSprite;
             bDashObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+            bDashObject.GetComponent<SpriteGlowEffect>().DrawOutside = true;
+            bDashObject.GetComponent<SpriteGlowEffect>().GlowColor = new Color(0.1647059f, 0f, 1f, 1f);
+            bDashObject.GetComponent<SpriteRenderer>().enabled = false;
+            //bDashObject.SetActive(true);
+            bDashObject.transform.GetComponent<Rigidbody2D>().position = transform.position;
+            
+            bDashObject.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(-tempPosX[0] * dashPower, -tempPosY[0] * dashPower);
+            bDashObject.GetComponent<SpriteRenderer>().enabled = true;
+            tempPosX.RemoveAt(0);
+            tempPosY.RemoveAt(0);
             //bDashTime = dashTime;
             if (dashingTimer < dashTime)
             {
@@ -689,6 +716,44 @@ public class ShroompController : MonoBehaviour
         {
             iceEffect.Clear();
             iceEffect.Pause();
+        }
+    }
+    public GameObject slashObject;
+    public AudioClip slashSound;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy") && isDashing)
+        {
+            Random.seed = System.DateTime.Now.Millisecond;
+
+            var slash = Instantiate(slashObject);
+            slash.SetActive(true);
+            slash.transform.position = collision.transform.position;
+            
+            
+            var slashAnimC = slash.GetComponent<Animator>();
+            audioSource.PlayOneShot(slashSound);
+            var rand = Random.Range(1, 5);
+            if (rand == 1)
+            {
+                slash.transform.rotation = Quaternion.Euler(0, 0, dashSpriteDirection+45);
+                slashAnimC.SetTrigger("Slash1");
+            }
+            if (rand == 2)
+            {
+                slash.transform.rotation = Quaternion.Euler(0, 0, dashSpriteDirection + 45);
+                slashAnimC.SetTrigger("Slash2");
+            }
+            if (rand == 3)
+            {
+                slash.transform.rotation = Quaternion.Euler(0, 0, dashSpriteDirection+90);
+                slashAnimC.SetTrigger("Slash3");
+            }
+            if (rand == 4)
+            {
+                slash.transform.rotation = Quaternion.Euler(0, 0, dashSpriteDirection+90);
+                slashAnimC.SetTrigger("Slash4");
+            }
         }
     }
     void PauseGame()

@@ -121,7 +121,10 @@ public class BatController : MonoBehaviour
 
                 invincibleTime = 0.2f;
                 isInvincible = true;
-                ChangeHealth(-1);
+                int damage = 10;
+                if (statusHandler.wideUp)
+                    damage = damage * 2;
+                ChangeHealth(-damage);
                 animator.SetTrigger("Damage");
                 if (currentHealth > 0)
                 {
@@ -141,6 +144,8 @@ public class BatController : MonoBehaviour
             ChangeHealth(-bombDamage);
             animator.SetTrigger("Damage");
         }
+        if(collision.CompareTag("Slash"))
+            ChangeHealth(-10);
 
     }
     void OnParticleCollision(GameObject other)

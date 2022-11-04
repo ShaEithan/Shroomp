@@ -11,6 +11,7 @@ public class StatusEffectController : MonoBehaviour
     public bool iceUp = true;
     public bool bombUp;
     public bool bDashUp;
+    public bool wideUp;
 
     // Start is called before the first frame update
     void Start()

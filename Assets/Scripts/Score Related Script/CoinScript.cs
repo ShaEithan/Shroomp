@@ -8,6 +8,7 @@ public class CoinScript : MonoBehaviour
     public AudioClip coinSound;
     private AudioSource audioSource;
     public int coinValue = 1;
+    private float delayT = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +22,11 @@ public class CoinScript : MonoBehaviour
             soundState = true;
         if(soundState && !audioSource.isPlaying)
             Destroy(gameObject);
+        delayT -= Time.deltaTime;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.tag == "Player")
+        if(collision.transform.tag == "Player" && delayT <0)
         {
             FindObjectOfType<ScoreScript>().score += coinValue;
             audioSource.PlayOneShot(coinSound);

@@ -9,11 +9,12 @@ public class SimpleInventory : MonoBehaviour
     private Transform itemContainer;
     private List<string> inventoryTrack = new List<string>();
     private List<GameObject> UI_Slots = new List<GameObject>();
-    private bool fireAdded, iceAdded, bombAdded,bDashAdded = false;
+    private bool fireAdded, iceAdded, bombAdded,bDashAdded,wideUpAdded = false;
     public Sprite iceSprite;
     public Sprite fireSprite;
     public Sprite bombSprite;
     public Sprite bDashSprite;
+    public Sprite wideSprite;
 
     int x = 0;
     int y = 0;
@@ -36,7 +37,7 @@ public class SimpleInventory : MonoBehaviour
             {
                 UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
                 UI_Slots[UI_Slots.Count - 1].SetActive(true);
-                UI_Slots[UI_Slots.Count - 1].GetComponent<SpriteRenderer>().sprite = fireSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = fireSprite;
                 UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
                 sortPosition();
                 fireAdded = true;
@@ -45,7 +46,7 @@ public class SimpleInventory : MonoBehaviour
             {
                 UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
                 UI_Slots[UI_Slots.Count - 1].SetActive(true);
-                UI_Slots[UI_Slots.Count - 1].GetComponent<SpriteRenderer>().sprite = iceSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = iceSprite;
                 UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
                 sortPosition();
                 iceAdded = true;
@@ -54,7 +55,7 @@ public class SimpleInventory : MonoBehaviour
             {
                 UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
                 UI_Slots[UI_Slots.Count - 1].SetActive(true);
-                UI_Slots[UI_Slots.Count - 1].GetComponent<SpriteRenderer>().sprite = bombSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = bombSprite;
                 UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
                 sortPosition();
                 bombAdded = true;
@@ -63,10 +64,19 @@ public class SimpleInventory : MonoBehaviour
             {
                 UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
                 UI_Slots[UI_Slots.Count - 1].SetActive(true);
-                UI_Slots[UI_Slots.Count - 1].GetComponent<SpriteRenderer>().sprite = bDashSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = bDashSprite;
                 UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
                 sortPosition();
                 bDashAdded = true;
+            }
+            if(item == "wideUp" && !wideUpAdded)
+            {
+                UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
+                UI_Slots[UI_Slots.Count - 1].SetActive(true);
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = wideSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
+                sortPosition();
+                wideUpAdded = true;
             }
         }
         if(inventoryTrack.Count==3)
@@ -114,6 +124,11 @@ public class SimpleInventory : MonoBehaviour
             {
                 bDashAdded = false;
                 Status.bDashUp = false;
+            }
+            if (inventoryTrack[i] == "wideUp")
+            {
+                wideUpAdded = false;
+                Status.wideUp = false;
             }
             inventoryTrack.RemoveAt(i);
             Destroy(UI_Slots[i].transform.gameObject);

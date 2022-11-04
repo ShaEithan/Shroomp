@@ -32,7 +32,8 @@ public class HealthTracker : MonoBehaviour
         x = 0;
         foreach (var item in hearts)
         {
-            hearts[x].GetComponent<RectTransform>().anchoredPosition = new Vector2((x * itemOffset)+20, (y * itemOffset)-20);
+            hearts[x].SetActive(true);
+            hearts[x].GetComponent<RectTransform>().anchoredPosition = new Vector2((x * itemOffset), (y * itemOffset));
             x++;
         }
     }
@@ -46,12 +47,12 @@ public class HealthTracker : MonoBehaviour
         hearts.Clear();
         for (int i = 0; i < shroompController.currentHealth / 2; i++)
         {
-            hearts.Add(Instantiate(heartTemplate, transform.parent));
+            hearts.Add(Instantiate(heartTemplate, transform));
             hearts[hearts.Count - 1].GetComponent<Container>().count = 2;
         }
         if(shroompController.currentHealth % 2 == 1)
         {
-            hearts.Add(Instantiate(heartTemplate, transform.parent));
+            hearts.Add(Instantiate(heartTemplate, transform));
             hearts[hearts.Count - 1].GetComponent<Container>().count = 1;
         }
         sortPosition();
