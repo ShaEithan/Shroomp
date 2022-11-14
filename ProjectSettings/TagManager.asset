@@ -11,6 +11,8 @@ TagManager:
   - MainRoom
   - Rooms
   - FutureRoomChecker
+  - Slash
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -29,8 +31,8 @@ TagManager:
   - Bomb
   - Particle Collider
   - Coin
-  - 
-  - 
+  - BossAltar
+  - BlockOnlyColliders
   - 
   - 
   - 

@@ -27,10 +27,10 @@ public class RoomSpawner : MonoBehaviour
 
 
         //Invoke("Spawn", 1f);
-        spawnDelay += Random.Range(0, 100) * 0.01f;
+        spawnDelay += Random.Range(0, 1000) * 0.0001f;
     }
-    public float spawnDelay = 1f;
-    public float destroyDelay = 100f;
+    private float spawnDelay = 1f;
+    private float destroyDelay = 6f;
     private void Update()
     {
 

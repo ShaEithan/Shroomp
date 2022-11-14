@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,14 +115,23 @@ TextureImporter:
         width: 50
         height: 26
       alignment: 0
+<<<<<<< Updated upstream
       pivot: {x: 0.5, y: 0.5}
+=======
+      pivot: {x: 0, y: 0}
+>>>>>>> Stashed changes
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: 7c3c6dd77dcf09542a5daa4ec4bba379
       internalID: 1052794666
+=======
+      spriteID: 6ac1cff21d6632349a89dd67b874601b
+      internalID: -24504743
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -136,14 +145,23 @@ TextureImporter:
         width: 50
         height: 26
       alignment: 0
+<<<<<<< Updated upstream
       pivot: {x: 0.5, y: 0.5}
+=======
+      pivot: {x: 0, y: 0}
+>>>>>>> Stashed changes
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: c45255ca955d9fa49bf7b5c16cef27d7
       internalID: 35585118
+=======
+      spriteID: f967babef95558b429c9aa772fa11d7f
+      internalID: -1198963132
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -157,14 +175,23 @@ TextureImporter:
         width: 50
         height: 26
       alignment: 0
+<<<<<<< Updated upstream
       pivot: {x: 0.5, y: 0.5}
+=======
+      pivot: {x: 0, y: 0}
+>>>>>>> Stashed changes
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
+<<<<<<< Updated upstream
       spriteID: e9952e229e2312441a091fb83dd307e5
       internalID: 1687468233
+=======
+      spriteID: 63502f586a9dc7644bb44cf5f6b49e70
+      internalID: -1097690765
+>>>>>>> Stashed changes
       vertices: []
       indices: 
       edges: []
@@ -180,9 +207,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+<<<<<<< Updated upstream
       Buttons1_0: 1052794666
       Buttons1_2: 1687468233
       Buttons1_1: 35585118
+=======
+      Buttons1_0: -24504743
+      Buttons1_2: -1097690765
+      Buttons1_1: -1198963132
+>>>>>>> Stashed changes
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

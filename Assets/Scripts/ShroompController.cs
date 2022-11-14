@@ -110,6 +110,10 @@ public class ShroompController : MonoBehaviour
         statusHandler = FindObjectOfType<StatusEffectController>();
         healhTracker = FindObjectOfType<HealthTracker>();
     }
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     int h = 0;
     // Update is called once per frame
     void Update()

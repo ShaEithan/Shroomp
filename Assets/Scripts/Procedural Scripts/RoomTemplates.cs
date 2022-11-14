@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
 {
-    public GameObject[] bottomRooms;
-    public GameObject[] topRooms;
-    public GameObject[] leftRooms;
-    public GameObject[] rightRooms;
-    public GameObject closedRoom;
-    public GameObject blockT, blockB, blockL, blockR;
 
-    public GameObject checker;
+    public GameObject blockT, blockB, blockL, blockR;
 
     public List<GameObject> rooms;
     public List<GameObject> unsortedRooms, TRooms, BRooms, LRooms, RRooms;
+    public List<GameObject> powerUps;
 
     public float waitTime;
     private bool spawnedBoss;
@@ -28,6 +23,9 @@ public class RoomTemplates : MonoBehaviour
             Instantiate(boss, rooms[rooms.Count - 1].transform.position, Quaternion.identity);
             spawnedBoss = true;
             pathFinder.Scan();
+            int randomNumber = Random.Range(0, powerUps.Count);
+            int randomRoomNumber = Random.Range(0, rooms.Count-2);
+            Instantiate(powerUps[randomNumber], rooms[randomRoomNumber].transform.position, Quaternion.identity);
         }
         else
         {

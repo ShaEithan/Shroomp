@@ -24,11 +24,14 @@ public class PowerUp : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Power Up collected");
-        sendPowerUpStatus();
-        //inventory.addItem(transform.GetComponent<SpriteRenderer>());
-        sendToInv();
-        Destroy(transform.gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("Power Up collected");
+            sendPowerUpStatus();
+            //inventory.addItem(transform.GetComponent<SpriteRenderer>());
+            sendToInv();
+            Destroy(transform.gameObject);
+        }
     }
     private void sendToInv()
     {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6459669254959877751}
   - component: {fileID: 6459669254959877748}
+  - component: {fileID: -1477403156041337391}
   m_Layer: 0
   m_Name: RandomCoinSpawner
   m_TagString: Untagged
@@ -47,3 +48,15 @@ MonoBehaviour:
   bronze: {fileID: 2369813381379937424, guid: 96b441135a1dd3146a7bb2ab31a326ad, type: 3}
   gold: {fileID: 2369813381379937424, guid: 23910aa43c7238d469273a3d5165a5f5, type: 3}
   diamond: {fileID: 2369813381379937424, guid: 169dba603cb1ffe439d71c282ed60977, type: 3}
+--- !u!114 &-1477403156041337391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459669254959877749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d02a7f83da7fe43a001c2ec7228e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
