@@ -91,6 +91,8 @@ public class ShroompController : MonoBehaviour
 
     //Heart container stuff
     HealthTracker healhTracker;
+    //Heart Empty container stuff
+    ContainerTracker containerTracker;
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +111,7 @@ public class ShroompController : MonoBehaviour
         currentHealth = maxHealth;
         statusHandler = FindObjectOfType<StatusEffectController>();
         healhTracker = FindObjectOfType<HealthTracker>();
+        containerTracker = FindObjectOfType<ContainerTracker>();
     }
     private void Awake()
     {
@@ -122,6 +125,7 @@ public class ShroompController : MonoBehaviour
         if (h == 0)
         {
             healhTracker.createContainers();
+            containerTracker.createContainers();
             h++;
         }
         wallGrabCheck();
@@ -467,7 +471,7 @@ public class ShroompController : MonoBehaviour
                 rigidbody2d.gravityScale = 0;
                 rigidbody2d.velocity = Vector2.zero;
                 isWallGrab = true;
-
+                animator.SetTrigger("GrabLeft");
 
             }
             if (isTouchingLeft && Input.GetKeyDown("space") && isWallGrab && grabTimer < 0)
@@ -495,7 +499,7 @@ public class ShroompController : MonoBehaviour
                 rigidbody2d.velocity = Vector2.zero;
                 isWallGrab = true;
 
-
+                animator.SetTrigger("GrabRight");
             }
 
             if (isTouchingRight && Input.GetKeyDown("space") && isWallGrab && grabTimer < 0)
@@ -579,6 +583,7 @@ public class ShroompController : MonoBehaviour
         if(deathTransitionTime <0 && deathplayed)
         {
             Cursor.visible = true;
+            ResumeGame();
             SceneManager.LoadScene("StartScreen");
         }
         deathDelayTime -= Time.unscaledDeltaTime;
