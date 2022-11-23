@@ -3768,7 +3768,7 @@ MonoBehaviour:
   - {x: -6.9999743, y: 0.99999, z: 0}
   m_ShapePathHash: -418120398
   m_Mesh: {fileID: 0}
-  m_InstanceId: 103788
+  m_InstanceId: 63676
 --- !u!1 &3770150102695147399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,7 +3834,7 @@ MonoBehaviour:
   - {x: -6.9999704, y: -7, z: 0}
   m_ShapePathHash: -1403976637
   m_Mesh: {fileID: 0}
-  m_InstanceId: 103792
+  m_InstanceId: 63680
 --- !u!1 &5112559873755037590
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,7 +4439,7 @@ GameObject:
   - component: {fileID: 3923863664957268012}
   - component: {fileID: 6508396196429449064}
   - component: {fileID: 8613730968401489853}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4961,7 +4961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 630956093346031599, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_InstanceId
-      value: -3098634
+      value: -1936300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -4981,7 +4981,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6949875387311779193, guid: c68be5a5e754716449647de07b660eab, type: 3}
       propertyPath: m_InstanceId
-      value: -3099594
+      value: -1936254
       objectReference: {fileID: 0}
     - target: {fileID: 7083550307646826467, guid: c68be5a5e754716449647de07b660eab, type: 3}
       propertyPath: m_Name
@@ -5097,7 +5097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 630956093346031599, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_InstanceId
-      value: -3099082
+      value: -1936228
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

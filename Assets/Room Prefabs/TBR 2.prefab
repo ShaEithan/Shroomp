@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8200082440673353687}
   - component: {fileID: 4464017325153191538}
   - component: {fileID: 1006376598349452833}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ MonoBehaviour:
   - {x: 6.1875076, y: 0.99999, z: 0}
   m_ShapePathHash: -1510965643
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61680
+  m_InstanceId: 62776
 --- !u!1 &1693504143470531938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,7 +2936,7 @@ MonoBehaviour:
   - {x: -6.9999743, y: -7.0000095, z: 0}
   m_ShapePathHash: -1624603537
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61708
+  m_InstanceId: 62806
 --- !u!1 &6144495628841454228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4748,7 +4748,7 @@ MonoBehaviour:
   - {x: 35.03126, y: 2.625, z: 0}
   m_ShapePathHash: 710928266
   m_Mesh: {fileID: 0}
-  m_InstanceId: -36072
+  m_InstanceId: 62774
 --- !u!1 &8522868721786398261
 GameObject:
   m_ObjectHideFlags: 0
@@ -4830,7 +4830,7 @@ MonoBehaviour:
   - {x: 33.03126, y: -1.375, z: 0}
   m_ShapePathHash: -1054901645
   m_Mesh: {fileID: 0}
-  m_InstanceId: -36082
+  m_InstanceId: 62772
 --- !u!1 &8941410258211585023
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,7 +4893,7 @@ MonoBehaviour:
   - {x: 1.0000252, y: -7.0000095, z: 0}
   m_ShapePathHash: 1181454466
   m_Mesh: {fileID: 0}
-  m_InstanceId: 61700
+  m_InstanceId: 62796
 --- !u!1001 &4390338913320557232
 PrefabInstance:
   m_ObjectHideFlags: 0
