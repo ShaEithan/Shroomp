@@ -8,7 +8,7 @@ public class AddRoom : MonoBehaviour
     private RoomTemplates templates;
     void Start()
     {
-        Invoke("makeReal", 1f);
+        Invoke("makeReal", 0.1f);
         if(!(transform.name == "Edge"))
         Invoke("addRoom", 0.2f);
     }

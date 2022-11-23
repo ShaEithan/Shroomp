@@ -13,11 +13,20 @@ public class ShroompMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Invoke("getShroomp", 2f);
+        //Invoke("getShroomp", 2f);
     }
     void getShroomp()
     {
         FindObjectOfType<ShroompController>().transform.position = transform.position;
+        FindObjectOfType<ParallaxCamera>().updateOld();
         Destroy(gameObject);
+    }
+    void OnEnable()
+    {
+        
+    }
+    private void Awake()
+    {
+        getShroomp();
     }
 }

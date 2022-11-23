@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProceduralTesting 2.unity
     guid: aa184b740b65b3e439bf762fae77792d
+  - enabled: 1
+    path: Assets/Scenes/Cloud1.unity
+    guid: cbcd71b4f304a404b9d878dce328c42a
   m_configObjects: {}

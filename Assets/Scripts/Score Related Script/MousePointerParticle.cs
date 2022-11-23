@@ -17,7 +17,7 @@ public class MousePointerParticle : MonoBehaviour
     {
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        transform.position = new Vector3(pos.x, pos.y, 1f);
+        transform.position = new Vector3(pos.x, pos.y, 5f);
     }
     private void FixedUpdate()
     {

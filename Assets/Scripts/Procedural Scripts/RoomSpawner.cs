@@ -16,7 +16,7 @@ public class RoomSpawner : MonoBehaviour
     private bool spawned = false;
     [SerializeField]
     private bool deadEnd = false;
-    
+    private bool needDeadend = false;
     public float waitTime = 10f;
     private float triggerDelay = 0f;
     void Start()
@@ -27,9 +27,9 @@ public class RoomSpawner : MonoBehaviour
 
 
         //Invoke("Spawn", 1f);
-        spawnDelay += Random.Range(0, 1000) * 0.0001f;
+        spawnDelay += Random.Range(0.2f, 0.4f);
     }
-    private float spawnDelay = 1f;
+    private float spawnDelay = 0.03f;
     private float destroyDelay = 6f;
     private void Update()
     {
@@ -41,6 +41,20 @@ public class RoomSpawner : MonoBehaviour
             Spawn();
         if (destroyDelay < 0)
             Destroy(gameObject);
+        //// If spawn fails dead end created here
+        //if (needDeadend && !hasRoom)
+        //{
+        //    Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!NEED DEAD END: " + openingDirection);
+        //    if (openingDirection == 1)
+        //        Instantiate(templates.blockT, transform.position - new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+        //    if (openingDirection == 2)
+        //        Instantiate(templates.blockB, transform.position + new Vector3(0, 14, 0), Quaternion.identity, transform.root);
+        //    if (openingDirection == 3)
+        //        Instantiate(templates.blockR, transform.position - new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+        //    if (openingDirection == 4)
+        //        Instantiate(templates.blockL, transform.position + new Vector3(14, 0, 0), Quaternion.identity, transform.root);
+        //    Destroy(gameObject);
+        //}
     }
 
     private void FixedUpdate()
@@ -76,6 +90,7 @@ public class RoomSpawner : MonoBehaviour
                 {
                     Destroy(spawnedRoom);
                     spawnedRoom = null;
+                    //needDeadend = true;
                     Debug.Log("---------------------------ROOM DELETED RETRYING ROOM IS NOW = " + spawnedRoom);
                 }
             }
@@ -91,6 +106,7 @@ public class RoomSpawner : MonoBehaviour
                 {
                     Destroy(spawnedRoom);
                     spawnedRoom = null;
+                    //needDeadend = true;
                     Debug.Log("---------------------------ROOM DELETED RETRYING ROOM IS NOW = " + spawnedRoom);
                 }
 
@@ -107,6 +123,7 @@ public class RoomSpawner : MonoBehaviour
                 {
                     Destroy(spawnedRoom);
                     spawnedRoom = null;
+                    //needDeadend = true;
                     Debug.Log("---------------------------ROOM DELETED RETRYING ROOM IS NOW = " + spawnedRoom);
 
                 }
@@ -123,6 +140,7 @@ public class RoomSpawner : MonoBehaviour
                 {
                     Destroy(spawnedRoom);
                     spawnedRoom = null;
+                    //needDeadend = true;
                     Debug.Log("---------------------------ROOM DELETED RETRYING ROOM IS NOW = " + spawnedRoom);
                 }
             }
@@ -133,22 +151,23 @@ public class RoomSpawner : MonoBehaviour
     public bool hasRoom = false;
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("RoomCore"))
+        // Checks if room is real
+        if (collision.CompareTag("RoomCore"))
         {
             if (collision.GetComponentInParent<AddRoom>().realRoom)
                 hasRoom = true;
         }
         //Debug.Log(triggerDelay > 1);
-        if (triggerDelay > 0.1)
+        if (triggerDelay > 1)
         {
 
-               //Debug.Log("Collision: " + collision);
+            //Debug.Log("Collision: " + collision);
 
             if (hasRoom && collision.CompareTag("RoomCore"))
             {
                 if (collision.GetComponentInParent<AddRoom>().realRoom)
                 {
-                    
+
                     spawned = true;
                     //Debug.Log("Room core name is: " + collision.transform.root.name);
                     //Debug.Log("Opening direction is: " + openingDirection);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SignalLevelLoader : MonoBehaviour
 {
+    public int forceLevelNumber = 0;
+    public bool forceStatus = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +17,22 @@ public class SignalLevelLoader : MonoBehaviour
     {
 
     }
+    bool isLoading = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.name == "Shroomp")
+        if (collisionGameObject.name == "Shroomp" && !isLoading)
         {
-            FindObjectOfType<LevelLoader2>().LoadNextLevel();
+            if (!forceStatus)
+            {
+                isLoading = true;
+                FindObjectOfType<LevelLoader2>().LoadNextLevel();
+            }
+            if(forceStatus)
+            {
+                isLoading = true;
+                FindObjectOfType<LevelLoader2>().LoadNextLevel(forceLevelNumber);
+            }
         }
     }
 }

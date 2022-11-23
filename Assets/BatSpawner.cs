@@ -8,7 +8,7 @@ public class BatSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Spawn", 15f);
+        Invoke("Spawn", 1f);
     }
 
     void Spawn()
