@@ -31,6 +31,7 @@ public class AiPatrol : MonoBehaviour
     Vector4 colorStorage;
 
     SpriteRenderer frogSprite;
+    SpriteRenderer FrogJump;
 
 
 
@@ -71,6 +72,7 @@ public class AiPatrol : MonoBehaviour
         mustPatrol = true;
         currentHealth = maxHealth;
         frogSprite = GetComponent<SpriteRenderer>();
+        FrogJump = GetComponent<SpriteRenderer>();
         colorStorage = frogSprite.color;
         statusHandler = FindObjectOfType<StatusEffectController>();
         
@@ -85,6 +87,7 @@ public class AiPatrol : MonoBehaviour
 
         if (TargetInDistance() && followEndable)
         {
+
             PathFollow();
         }
         else 
