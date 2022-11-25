@@ -1,0 +1,374 @@
+fileFormatVersion: 2
+guid: 3046b3f37cebb5947bdc086175dfd808
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: temp_gui_gradient_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 143735a62d4ac274696a36ac18337d4d
+      internalID: 626711744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe003d6a838ec445b47bfb1cbf51bcd
+      internalID: -1080245186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9cbf41547a7ce145a650f2fbae56bb4
+      internalID: -870417564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b34e852f86f764458a90df5000c8af6
+      internalID: 779966998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6325766dab0c2843942ebc498c95614
+      internalID: -1832534823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd6cc2aea2c517348aeefda2252b1945
+      internalID: -1410581252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9cf96032085a8409f89eea5f71a5f3
+      internalID: -1047357533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77c7aeecfb59138419a1c31d472cdca2
+      internalID: 1731026757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: temp_gui_gradient_16
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4e6b354a7d7a864cb1b369a266c6334
+      internalID: 1008915190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      temp_gui_gradient_30: 236044907
+      temp_gui_gradient_18: 1187900779
+      temp_gui_gradient_58: -762818322
+      temp_gui_gradient_38: -681954609
+      temp_gui_gradient_42: -1193885787
+      temp_gui_gradient_49: -1796588192
+      temp_gui_gradient_44: -1044364386
+      temp_gui_gradient_26: -147218867
+      temp_gui_gradient_28: -608962860
+      temp_gui_gradient_60: 127837001
+      temp_gui_gradient_11: -1410581252
+      temp_gui_gradient_41: -864948828
+      temp_gui_gradient_24: 1348764334
+      temp_gui_gradient_53: -906845267
+      temp_gui_gradient_43: -1224618726
+      temp_gui_gradient_54: 1515788816
+      temp_gui_gradient_14: -1047357533
+      temp_gui_gradient_22: -1781709175
+      temp_gui_gradient_6: 1113003086
+      temp_gui_gradient_51: -1551376482
+      temp_gui_gradient_17: -1726096484
+      temp_gui_gradient_29: 230304958
+      temp_gui_gradient_56: 1689754686
+      temp_gui_gradient_39: 1629139766
+      temp_gui_gradient_32: -2006242974
+      temp_gui_gradient_23: 1011312723
+      temp_gui_gradient_19: -993991502
+      temp_gui_gradient_21: 1719409086
+      temp_gui_gradient_12: -561767627
+      temp_gui_gradient_57: 1359134653
+      temp_gui_gradient_5: 720410083
+      temp_gui_gradient_50: 1311244286
+      temp_gui_gradient_9: 779966998
+      temp_gui_gradient_8: 118533795
+      temp_gui_gradient_35: -929950360
+      temp_gui_gradient_46: -2053715049
+      temp_gui_gradient_40: 2039502168
+      temp_gui_gradient_52: 112771989
+      temp_gui_gradient_34: -1080383515
+      temp_gui_gradient_16: 1008915190
+      temp_gui_gradient_31: 387354230
+      temp_gui_gradient_33: 943537327
+      temp_gui_gradient_2: -870417564
+      temp_gui_gradient_47: -1165737492
+      temp_gui_gradient_1: -1080245186
+      temp_gui_gradient_13: -104839459
+      temp_gui_gradient_36: -1805439862
+      temp_gui_gradient_55: -482111033
+      temp_gui_gradient_4: -1883517578
+      temp_gui_gradient_37: 720397857
+      temp_gui_gradient_0: 626711744
+      temp_gui_gradient_45: 1932575628
+      temp_gui_gradient_59: 530704441
+      temp_gui_gradient_20: 1845221405
+      temp_gui_gradient_3: 149334795
+      temp_gui_gradient_7: 1700748476
+      temp_gui_gradient_27: 1058066726
+      temp_gui_gradient_25: -1065847381
+      temp_gui_gradient_10: -1832534823
+      temp_gui_gradient_15: 1731026757
+      temp_gui_gradient_48: -1519380322
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

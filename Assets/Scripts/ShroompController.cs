@@ -12,6 +12,7 @@ public class ShroompController : MonoBehaviour
     public float jumpPower = 10;
     public float dashPower = 50;
     public int dashAmmount = 3;
+    public float dashRegenTime = 3f;
     //Used to calculate the jump that happens against the wall
     public float wallGrabJumpPower = 4f;
     //Used to set time for wall jumps, too low and it gets you stuck on the wall
@@ -40,7 +41,7 @@ public class ShroompController : MonoBehaviour
     public float checkRadius;
     public Transform groundCheck, leftCheck, rightCheck, upCheck;
 
-    int dashes;
+    public int dashes;
     public bool isDashing;
     private float dashingTimer;
     public float dashTime = 0.05f;
@@ -93,6 +94,8 @@ public class ShroompController : MonoBehaviour
     HealthTracker healhTracker;
     //Heart Empty container stuff
     ContainerTracker containerTracker;
+    //Feather tracker stuff
+    FeatherTracker featherTracker;
     // Start is called before the first frame update
     void Start()
     {
@@ -112,6 +115,8 @@ public class ShroompController : MonoBehaviour
         statusHandler = FindObjectOfType<StatusEffectController>();
         healhTracker = FindObjectOfType<HealthTracker>();
         containerTracker = FindObjectOfType<ContainerTracker>();
+        featherTracker = FindObjectOfType<FeatherTracker>();
+        dashes = dashAmmount;
     }
     private void Awake()
     {
@@ -126,6 +131,7 @@ public class ShroompController : MonoBehaviour
         {
             healhTracker.createContainers();
             containerTracker.createContainers();
+            featherTracker.createContainers();
             h++;
         }
         wallGrabCheck();
@@ -193,16 +199,19 @@ public class ShroompController : MonoBehaviour
         }
         else if (isGrounded == true)
         {
-            dashes = dashAmmount;
+            //CancelInvoke("increaseDashes"); //cancel dash increase invokes
+            //dashes = dashAmmount;
             //Debug.Log("I am grounded");
-            animator.SetBool("Jumping", false);
-            animator.SetBool("Dash", false);
-            ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+            //animator.SetBool("Jumping", false);
+            //animator.SetBool("Dash", false);
+            //ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
 
         }
 
         //A dash will happen as long as you aren't in the process of a wall jump, or are grounded
-        if (Input.GetMouseButtonDown(0) && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
+        //        if (Input.GetMouseButtonDown(0) && dashes > 0 && !isTouchingLeft && !isTouchingRight && !isGrounded)
+
+        if (Input.GetMouseButtonDown(0) && dashes > 0)
         {
             //bDash power up code triggered on end of dash
             if (statusHandler.bDashUp)
@@ -248,6 +257,9 @@ public class ShroompController : MonoBehaviour
 
 
             dashes = dashes - 1;
+            featherTracker.createContainers();
+            //Invoke attempt to increase dashes after a certain amount
+            Invoke("increaseDashes", dashRegenTime);
             isDashing = true;
             //Set gravit to 0 for dashing
             rigidbody2d.gravityScale = 0;
@@ -304,6 +316,7 @@ public class ShroompController : MonoBehaviour
                 //Re adds gravity scale when dash ends by impact
                 rigidbody2d.gravityScale = 1;
             }
+            /**
             else if (isTouchingLeft)
             {
                 //rigidbody2d.velocity = impactVelocity;
@@ -334,6 +347,7 @@ public class ShroompController : MonoBehaviour
                 //Re adds gravity scale when dash ends by impact
                 //rigidbody2d.gravityScale = 1;
             }
+            
             else if (isGrounded)
             {
                 rigidbody2d.velocity = impactVelocity;
@@ -349,6 +363,7 @@ public class ShroompController : MonoBehaviour
                 //Re adds gravity scale when dash ends by impact
                 rigidbody2d.gravityScale = 1;
             }
+            **/
         }
         //Used countdown invincibility time to avoid taking damage too much in a couple of frames of collision detection
         if (isInvincible)
@@ -410,6 +425,7 @@ public class ShroompController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //wallGrabCheck();
         //Can't use movement controls while dashing or grabbing a wall
         //If setting velocity or adding force isn't working it's prob related to this
         if (!isDashing && grabTimer<0 && !isWallGrab)
@@ -465,7 +481,7 @@ public class ShroompController : MonoBehaviour
             // !lastSideJumped bypasses grabTimer as it means you came from opposite side wall so its ok to proceed
             // With no collide issues
             // Could probably be simplified as canWalljump = grabTimer <0 
-            if(isTouchingLeft && (grabTimer < 0 || !lastSideJumped) && canWallJump )
+            if(isTouchingLeft && (grabTimer < 0 || !lastSideJumped) && canWallJump && Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("Jumping", false);
                 rigidbody2d.gravityScale = 0;
@@ -492,7 +508,7 @@ public class ShroompController : MonoBehaviour
                 impactEffect.Play();
             }
             //Right side wall jumping code
-            if (isTouchingRight && (grabTimer < 0 || lastSideJumped) && canWallJump)
+            if (isTouchingRight && (grabTimer < 0 || lastSideJumped) && canWallJump && Input.GetKey(KeyCode.D))
             {
                 animator.SetBool("Jumping", false);
                 rigidbody2d.gravityScale = 0;
@@ -526,12 +542,21 @@ public class ShroompController : MonoBehaviour
             isWallGrab = false;
             canWallJump = false;
             rigidbody2d.gravityScale = 1;
+            animator.SetTrigger("LetGo");
         }
-        if(isWallGrab && isGrounded)
+        if((isWallGrab && isGrounded))
         {
             isWallGrab = false;
             canWallJump = false;
             rigidbody2d.gravityScale = 1;
+            animator.SetTrigger("LetGo");
+        }
+        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        {
+            isWallGrab = false;
+            canWallJump = false;
+            rigidbody2d.gravityScale = 1;
+            animator.SetTrigger("LetGo");
         }
         
     }
@@ -772,5 +797,13 @@ public class ShroompController : MonoBehaviour
     void ResumeGame()
     {
         Time.timeScale = 1;
+    }
+    void increaseDashes()
+    {
+        if (dashes < dashAmmount)
+        {
+            dashes++;
+            featherTracker.createContainers();
+        }
     }
 }

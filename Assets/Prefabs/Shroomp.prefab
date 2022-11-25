@@ -10813,7 +10813,7 @@ Transform:
   - {fileID: 1158176342}
   - {fileID: 2042784355}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1112319514929670659
 SpriteRenderer:
@@ -10949,6 +10949,7 @@ MonoBehaviour:
   jumpPower: 5
   dashPower: 15
   dashAmmount: 3
+  dashRegenTime: 4.5
   wallGrabJumpPower: 460
   wallGrabTimeSetter: 0.3
   hurt: {fileID: 8300000, guid: 84fec6a6e83d2ad449e6b4cf3fa47c9d, type: 3}
@@ -10963,6 +10964,7 @@ MonoBehaviour:
   leftCheck: {fileID: 5415631948498451344}
   rightCheck: {fileID: 5860836729163461493}
   upCheck: {fileID: 8673820401150522457}
+  dashes: 0
   isDashing: 0
   dashTime: 0.25
   maxHealth: 8
@@ -11135,7 +11137,7 @@ MonoBehaviour:
   - {x: -0.0010364056, y: -0.26760077, z: 0}
   m_ShapePathHash: 761900399
   m_Mesh: {fileID: 0}
-  m_InstanceId: -139508
+  m_InstanceId: -3620
 --- !u!114 &2032085399
 MonoBehaviour:
   m_ObjectHideFlags: 0
