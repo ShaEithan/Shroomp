@@ -5,6 +5,7 @@ using TMPro;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using SpriteGlow;
+using System.Collections;
 
 public class ShroompController : MonoBehaviour
 {
@@ -754,6 +755,7 @@ public class ShroompController : MonoBehaviour
     }
     public GameObject slashObject;
     public AudioClip slashSound;
+  
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Enemy") && isDashing)
@@ -762,9 +764,10 @@ public class ShroompController : MonoBehaviour
 
             var slash = Instantiate(slashObject);
             slash.SetActive(true);
-            slash.transform.position = collision.transform.position;
-            
-            
+            //slash.transform.position = collision.transform.position;
+            slash.transform.position = collision.ClosestPoint(transform.position);
+
+
             var slashAnimC = slash.GetComponent<Animator>();
             audioSource.PlayOneShot(slashSound);
             var rand = Random.Range(1, 5);
@@ -789,7 +792,9 @@ public class ShroompController : MonoBehaviour
                 slashAnimC.SetTrigger("Slash4");
             }
         }
+
     }
+
     void PauseGame()
     {
         Time.timeScale = 0;
@@ -805,5 +810,12 @@ public class ShroompController : MonoBehaviour
             dashes++;
             featherTracker.createContainers();
         }
+    }
+    void OnParticleCollision(GameObject other)
+    {
+        Debug.Log(other.tag + " ISSS THEEE TAGGG");
+        if (other.CompareTag("Rain") && !isDashing)
+            ChangeHealth(-1);
+
     }
 }
