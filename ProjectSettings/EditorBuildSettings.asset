@@ -21,8 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/ProceduralTesting.unity
     guid: 6e763e220d9a08d448f6c22519d429ae
   - enabled: 1
-    path: Assets/Scenes/ProceduralTesting 2.unity
-    guid: aa184b740b65b3e439bf762fae77792d
+    path: Assets/Scenes/Level1 Boss.unity
+    guid: 39f81134f26d7aa4cb47d8b244e57695
+  - enabled: 1
+    path: Assets/Scenes/DeadKnight.unity
+    guid: 7e6c129a9b883d5419f708cc5c1c08f1
   - enabled: 1
     path: Assets/Scenes/Cloud1.unity
     guid: cbcd71b4f304a404b9d878dce328c42a

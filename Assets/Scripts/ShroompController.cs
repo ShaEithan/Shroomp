@@ -14,6 +14,7 @@ public class ShroompController : MonoBehaviour
     public float dashPower = 50;
     public int dashAmmount = 3;
     public float dashRegenTime = 3f;
+    public float dashRegenTimeFast = 0.75f;
     //Used to calculate the jump that happens against the wall
     public float wallGrabJumpPower = 4f;
     //Used to set time for wall jumps, too low and it gets you stuck on the wall
@@ -108,7 +109,7 @@ public class ShroompController : MonoBehaviour
         //textHealth = GameObject.Find("charHealthText").GetComponent<TMPro.TextMeshProUGUI>();
         //healthCanvasPos = GameObject.Find("CanvasHealth").GetComponent<Transform>();
         rangeCircle = GameObject.Find("RangeCircle").GetComponent<Transform>();
-        rectile = GameObject.Find("Reticle").GetComponent<Transform>();
+       // rectile = GameObject.Find("Reticle").GetComponent<Transform>();
 
         audioSource = GetComponent<AudioSource>();
         mainCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
@@ -203,9 +204,12 @@ public class ShroompController : MonoBehaviour
             //CancelInvoke("increaseDashes"); //cancel dash increase invokes
             //dashes = dashAmmount;
             //Debug.Log("I am grounded");
-            //animator.SetBool("Jumping", false);
+            animator.SetBool("Jumping", false);
             //animator.SetBool("Dash", false);
             //ShroompSpriteT.rotation = Quaternion.Euler(0, 0, 0);
+            CancelInvoke("increaseDashes");
+            if(!isFastRunning)
+            InvokeRepeating("increaseDashesFast",0, dashRegenTimeFast);
 
         }
 
@@ -383,10 +387,10 @@ public class ShroompController : MonoBehaviour
         //recticleOffset = ((dashPower * dashTime) * (31f / 450f));
 
 
-        rangeCircle.transform.localScale = new Vector2(rangeOffset, rangeOffset);
-        rectile.transform.localPosition = new Vector2((mouseDirection.x * dashPower) *dashTime, (mouseDirection.y * dashPower) * dashTime);
+        //rangeCircle.transform.localScale = new Vector2(rangeOffset, rangeOffset);
+        //rectile.transform.localPosition = new Vector2((mouseDirection.x * dashPower) *dashTime, (mouseDirection.y * dashPower) * dashTime);
         //Code for rotation the circle
-        rangeCircle.transform.Rotate(0, 0, -8 * Time.deltaTime);
+        //rangeCircle.transform.Rotate(0, 0, -8 * Time.deltaTime);
 
 
         if (isDead)
@@ -805,10 +809,32 @@ public class ShroompController : MonoBehaviour
     }
     void increaseDashes()
     {
+        Debug.Log("Slow dash gained!");
         if (dashes < dashAmmount)
         {
             dashes++;
             featherTracker.createContainers();
+        }
+        if(dashes == dashAmmount)
+        {
+            isFastRunning = false;
+            CancelInvoke("increaseDashes");
+        }
+    }
+    private bool isFastRunning = false;
+    void increaseDashesFast()
+    {
+        Debug.Log("Faster dash gained!");
+        isFastRunning = true;
+        if (dashes < dashAmmount)
+        {
+            dashes++;
+            featherTracker.createContainers();
+        }
+        if (dashes == dashAmmount)
+        {
+            isFastRunning =false;
+            CancelInvoke("increaseDashesFast");
         }
     }
     void OnParticleCollision(GameObject other)

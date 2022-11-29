@@ -9864,7 +9864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 0}
+  target: {fileID: 7513087393200565461, guid: 252bdab50432bcb4b877f11ca8a3f967, type: 3}
 --- !u!50 &7763967440542202899
 Rigidbody2D:
   serializedVersion: 4
@@ -9933,3 +9933,4 @@ MonoBehaviour:
   dotAmmount: 5
   dotPulseDuration: 5
   invulTime: 0.5
+  damageSound: {fileID: 0}

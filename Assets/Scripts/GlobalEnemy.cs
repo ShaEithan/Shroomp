@@ -9,9 +9,9 @@ public class GlobalEnemy : MonoBehaviour
     public int damageTaken = 20;
     public int fireWeakness,iceWeakness;
     public int enemyDamage = 1;
-    public float dotRate = 3f;
+    public float dotRate = 1.25f;
     public int dotAmmount = 5;
-    public float dotPulseDuration= 12.5f;
+    public float dotPulseDuration= 5f;
     public float invulTime = 0.5f;
     private float invulTimeStorage;
     //Status handle script
@@ -19,7 +19,8 @@ public class GlobalEnemy : MonoBehaviour
     private SpriteRenderer sprite;
     private float defaultSpeed;
 
-
+    private AudioSource audioSource;
+    public AudioClip damageSound;
 
     private float invincibleTime;
     private bool isInvincible = false;
@@ -32,12 +33,15 @@ public class GlobalEnemy : MonoBehaviour
         dotAStorage = dotAmmount;
         dotDurationStorage = dotPulseDuration;
         invulTimeStorage = invulTime;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         invulTime -= Time.deltaTime;
+        if (GetComponent<AIDestinationSetter>().target == null)
+            GetComponent<AIDestinationSetter>().target = FindObjectOfType<ShroompController>().transform;
     }
     private float iceRate = 0.5f;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,9 +71,16 @@ public class GlobalEnemy : MonoBehaviour
                 collision.gameObject.GetComponent<ShroompController>().ChangeHealth(-enemyDamage);
            
         }
+        if (collision.gameObject.tag == "Star")
+        {
+            ChangeHealth(-10);
+            Destroy(collision.gameObject);
+
+        }
     }
     private void ChangeHealth(int i)
     {
+        audioSource.PlayOneShot(damageSound);
         Health += i;
         if (Health <= 0)
             Destroy(transform.gameObject);
