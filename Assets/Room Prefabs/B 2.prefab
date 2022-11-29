@@ -4517,7 +4517,7 @@ MonoBehaviour:
   - {x: 1.0000293, y: -7, z: 0}
   m_ShapePathHash: 1433920264
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56044
+  m_InstanceId: 60802
 --- !u!1001 &2766387047086954631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4594,6 +4594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 309117481900552809, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 309117481900552811, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4640,7 +4644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 630956093346031599, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_InstanceId
-      value: -1575850
+      value: -28496
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -4726,6 +4730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 309117481900552809, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 309117481900552811, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4772,7 +4780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 630956093346031599, guid: 060fa7673b06b0e439ecf650d683ce7d, type: 3}
       propertyPath: m_InstanceId
-      value: -1575888
+      value: -28526
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
