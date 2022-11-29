@@ -11,11 +11,17 @@ public class PowerUp : MonoBehaviour
     public bool bombUp = false;
     public bool bDashUp = false;
     public bool wideUp = false;
+    public bool redUp = false;
+    public bool blueUp = false;
+    public GameObject redFairy, blueFairy;
     // Start is called before the first frame update
     void Start()
     {
         Status = FindObjectOfType<StatusEffectController>();
         inventory = FindObjectOfType<SimpleInventory>();
+        redFairy = Status.gameObject.transform.GetChild(0).gameObject;
+
+        blueFairy = Status.gameObject.transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame
@@ -45,6 +51,16 @@ public class PowerUp : MonoBehaviour
             inventory.addItem("bDashUp");
         if (wideUp)
             inventory.addItem("wideUp");
+        if (redUp)
+        {
+            inventory.addItem("redUp");
+            redFairy.SetActive(true);
+        }
+        if (blueUp)
+        {
+            inventory.addItem("blueUp");
+            blueFairy.SetActive(true);
+        }
     }
     void sendPowerUpStatus()
     {
@@ -68,5 +84,9 @@ public class PowerUp : MonoBehaviour
         {
             Status.wideUp = wideUp;
         }
+        if (redUp)
+            Status.redUp = redUp;
+        if (blueUp)
+            Status.blueUp = blueUp;
     }
 }

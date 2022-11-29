@@ -9,12 +9,14 @@ public class SimpleInventory : MonoBehaviour
     private Transform itemContainer;
     private List<string> inventoryTrack = new List<string>();
     private List<GameObject> UI_Slots = new List<GameObject>();
-    private bool fireAdded, iceAdded, bombAdded,bDashAdded,wideUpAdded = false;
+    private bool fireAdded, iceAdded, bombAdded,bDashAdded,wideUpAdded,redAdded,blueAdded = false;
     public Sprite iceSprite;
     public Sprite fireSprite;
     public Sprite bombSprite;
     public Sprite bDashSprite;
     public Sprite wideSprite;
+    public Sprite redSprite;
+    public Sprite blueSprite;
 
     int x = 0;
     int y = 0;
@@ -78,9 +80,29 @@ public class SimpleInventory : MonoBehaviour
                 sortPosition();
                 wideUpAdded = true;
             }
+            if (item == "redUp" && !redAdded)
+            {
+                UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
+                UI_Slots[UI_Slots.Count - 1].SetActive(true);
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = redSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
+                sortPosition();
+                redAdded = true;
+            }
+            if (item == "blueUp" && !blueAdded)
+            {
+                UI_Slots.Add(Instantiate(itemTemplate, itemContainer).gameObject);
+                UI_Slots[UI_Slots.Count - 1].SetActive(true);
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UnityEngine.UI.Image>().sprite = blueSprite;
+                UI_Slots[UI_Slots.Count - 1].GetComponent<UI_Count>().slotNumber = UI_Slots.Count;
+                sortPosition();
+                blueAdded = true;
+            }
         }
+        /**
         if(inventoryTrack.Count==3)
             removeAt(0);
+        **/
     }
     private void sortPosition()
     {
@@ -129,6 +151,16 @@ public class SimpleInventory : MonoBehaviour
             {
                 wideUpAdded = false;
                 Status.wideUp = false;
+            }
+            if (inventoryTrack[i] == "redUp")
+            {
+                redAdded = false;
+                Status.redUp = false;
+            }
+            if (inventoryTrack[i] == "blueUp")
+            {
+                wideUpAdded = false;
+                Status.blueUp = false;
             }
             inventoryTrack.RemoveAt(i);
             Destroy(UI_Slots[i].transform.gameObject);

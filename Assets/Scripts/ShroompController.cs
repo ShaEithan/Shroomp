@@ -29,6 +29,7 @@ public class ShroompController : MonoBehaviour
     public AudioClip hurt;
     public AudioClip dead;
     public AudioClip swoosh;
+    public AudioClip Shield;
     //ParticleStuff
     public ParticleSystem impactEffect;
     public ParticleSystem iceEffect,fireEffect;
@@ -98,6 +99,8 @@ public class ShroompController : MonoBehaviour
     ContainerTracker containerTracker;
     //Feather tracker stuff
     FeatherTracker featherTracker;
+    //Blue fairy object script
+    public BlueFairyScript blueFairy;
     // Start is called before the first frame update
     void Start()
     {
@@ -572,6 +575,12 @@ public class ShroompController : MonoBehaviour
 
             if (isInvincible)
                 return;
+            if(blueFairy.isActiveAndEnabled && blueFairy.shieldStatus)
+            {
+                audioSource.PlayOneShot(Shield);
+                blueFairy.shieldStatus = false;
+                return;
+            }
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
