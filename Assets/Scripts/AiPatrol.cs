@@ -130,17 +130,17 @@ public class AiPatrol : MonoBehaviour
     }
     private void PathFollow()
     {
-        Debug.Log("atrted path");
+        
         if (path == null)
         {
-            Debug.Log("127");
+            
             return;
         }
 
         // Reached end of path
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            Debug.Log("134");
+            
             return;
         }
 
