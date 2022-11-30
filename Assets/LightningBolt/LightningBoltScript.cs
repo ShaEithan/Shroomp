@@ -310,7 +310,6 @@ namespace DigitalRuby.LightningBolt
                 else
                 {
                     Trigger();
-                    segments.Clear();
                 }
 
                 
@@ -350,18 +349,15 @@ namespace DigitalRuby.LightningBolt
             if (Input.GetKey(KeyCode.Q))
             {
                 attackStart += Time.deltaTime;
-                if (checkTime(attackStart)){
+                if (checkTime(attackStart))
+                {
                     GenerateLightningBolt(start, end, Generations, Generations, 0.0f);
                 }
-            }else if (Input.GetKeyUp(KeyCode.Q))
-            {
+            }else if (Input.GetKeyUp(KeyCode.Q)){
                 attackStart = 0.0f;
             }
 
-            
-            
-            
-            GenerateLightningBolt(start, start, 5, 5, 0.0f);
+            GenerateLightningBolt(start, start, Generations, Generations, 0.0f);
             UpdateLineRenderer();
     
         }
