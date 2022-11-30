@@ -40,8 +40,16 @@ public class GlobalEnemy : MonoBehaviour
     void Update()
     {
         invulTime -= Time.deltaTime;
-        if (GetComponent<AIDestinationSetter>().target == null)
-            GetComponent<AIDestinationSetter>().target = FindObjectOfType<ShroompController>().transform;
+        if (!gameObject.name.Contains("Cloud"))
+        {
+            if (GetComponent<AIDestinationSetter>().target == null)
+                GetComponent<AIDestinationSetter>().target = FindObjectOfType<ShroompController>().transform;
+        }
+        if (gameObject.name.Contains("Cloud"))
+        {
+            if (GetComponent<AIDestinationSetter>().target == null)
+                GetComponent<AIDestinationSetter>().target = FindObjectOfType<ShroompController>().transform.GetChild(18);
+        }
     }
     private float iceRate = 0.5f;
     private void OnTriggerEnter2D(Collider2D collision)
