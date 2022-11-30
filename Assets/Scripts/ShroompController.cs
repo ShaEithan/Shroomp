@@ -59,6 +59,10 @@ public class ShroompController : MonoBehaviour
 
     private float lastImageXpos;
 
+    // Scene Stuff
+    Scene currentScene = SceneManager.GetActiveScene();
+    string sceneName;
+
     [SerializeField]
     private int maxHealth = 5;
     public int currentHealth;
@@ -131,7 +135,9 @@ public class ShroompController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentScene = SceneManager.GetActiveScene();
+        sceneName = currentScene.name;
+
         if (h == 0)
         {
             healhTracker.createContainers();
