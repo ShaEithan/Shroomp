@@ -11,7 +11,10 @@ public class AiPatrol : MonoBehaviour
     [HideInInspector]
     public bool mustPatrol;
     private bool mustTurn;
-   
+
+
+    public Animator animator;
+
 
     public Rigidbody2D rb;
     public Transform groundCheckPos;
@@ -87,7 +90,7 @@ public class AiPatrol : MonoBehaviour
 
         if (TargetInDistance() && followEndable)
         {
-
+            animator.SetFloat("Transformation", 2);
             PathFollow();
         }
         else 
@@ -130,7 +133,8 @@ public class AiPatrol : MonoBehaviour
     }
     private void PathFollow()
     {
-        
+
+        animator.SetFloat("IdleForg", 2);
         if (path == null)
         {
             
