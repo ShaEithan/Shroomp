@@ -91,7 +91,10 @@ public class GlobalEnemy : MonoBehaviour
         audioSource.PlayOneShot(damageSound);
         Health += i;
         if (Health <= 0)
+        {
+            FindObjectOfType<RandomCoinSpawner>().spawnRandom(transform);
             Destroy(transform.gameObject);
+        }
     }
     private int dotAStorage;
     private void FireDot()

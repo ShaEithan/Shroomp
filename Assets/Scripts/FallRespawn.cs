@@ -17,6 +17,8 @@ public class FallRespawn : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
+        if (player == null)
+            player = GameObject.Find("Shroomp");
 
         if (sceneName == "Level2")
         {

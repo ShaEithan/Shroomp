@@ -63,8 +63,8 @@ public class ShroompController : MonoBehaviour
     Scene currentScene = SceneManager.GetActiveScene();
     string sceneName;
 
-    [SerializeField]
-    private int maxHealth = 5;
+  
+    public int maxHealth = 5;
     public int currentHealth;
     public float timeInvincible = 5f;
 
@@ -227,8 +227,9 @@ public class ShroompController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && dashes > 0)
         {
+
             //bDash power up code triggered on end of dash
-            if (statusHandler.bDashUp)
+            if (statusHandler.bDashUp && maxHealth == 9999)
             {
                 timeDif = dashingTimer;
                 //Debug.Log("BDASH TRIGGERED");
@@ -237,7 +238,7 @@ public class ShroompController : MonoBehaviour
                 tempPosY.Add(mouseDirection.y);
                 //Calculate angle trijectory angle for ghost image power up
                 if (mouseDirection.x * dashPower > 0)
-                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y *dashPower) / (mouseDirection.x * dashPower))) - 90 * -1);
+                    tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y * dashPower) / (mouseDirection.x * dashPower))) - 90 * -1);
                 else if (mouseDirection.x * dashPower < 0)
                     tempdashSpriteDirection.Add((Mathf.Rad2Deg * Mathf.Atan((mouseDirection.y * dashPower) / (mouseDirection.x * dashPower))) - 90 * 1);
                 else if (mouseDirection.x * dashPower == 0)
@@ -264,6 +265,8 @@ public class ShroompController : MonoBehaviour
                 //Debug.Log("1st Bdash?");
                 //Debug.Log("Count tempDashD: " + tempdashSpriteDirection.Count + " Count tempX: " + tempPosX.Count + " Count tempY: " + tempPosY.Count);
             }
+        
+            
             Debug.Log("Dash attempt");
             animator.SetBool("Dash", true);
             rigidbody2d.velocity = new Vector2(mouseDirection.x * dashPower, mouseDirection.y * dashPower);

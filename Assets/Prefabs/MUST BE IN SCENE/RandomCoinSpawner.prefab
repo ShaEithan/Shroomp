@@ -48,6 +48,7 @@ MonoBehaviour:
   bronze: {fileID: 2369813381379937424, guid: 96b441135a1dd3146a7bb2ab31a326ad, type: 3}
   gold: {fileID: 2369813381379937424, guid: 23910aa43c7238d469273a3d5165a5f5, type: 3}
   diamond: {fileID: 2369813381379937424, guid: 169dba603cb1ffe439d71c282ed60977, type: 3}
+  heart: {fileID: 3516160839726716678, guid: 1baa3d68d7a71a44fac07a28fb5efde5, type: 3}
 --- !u!114 &-1477403156041337391
 MonoBehaviour:
   m_ObjectHideFlags: 0

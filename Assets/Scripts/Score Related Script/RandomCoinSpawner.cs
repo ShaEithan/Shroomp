@@ -5,6 +5,7 @@ using UnityEngine;
 public class RandomCoinSpawner : MonoBehaviour
 {
     public GameObject bronze, gold, diamond;
+    public GameObject heart;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +32,8 @@ public class RandomCoinSpawner : MonoBehaviour
         {
             Instantiate(diamond).transform.position = input.position;
         }
+        rand = Random.Range(0, 100);
+        if(rand >= 0 && rand <= 50)
+            Instantiate(heart).transform.position = input.position;
     }
 }
