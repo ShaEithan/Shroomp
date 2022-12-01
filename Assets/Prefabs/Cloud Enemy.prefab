@@ -9727,7 +9727,7 @@ Transform:
   m_Children:
   - {fileID: 7763967440300451183}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7763967440542202905
 SpriteRenderer:
@@ -9924,7 +9924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104918328c257d1419f56a18a5865192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 75
   damageTaken: 5
   fireWeakness: 1
   iceWeakness: 1

@@ -121,7 +121,7 @@ Transform:
   m_Children:
   - {fileID: 6633231832518772221}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6633231832865318235
 SpriteRenderer:
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104918328c257d1419f56a18a5865192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 80
   damageTaken: 5
   fireWeakness: 1
   iceWeakness: 1
