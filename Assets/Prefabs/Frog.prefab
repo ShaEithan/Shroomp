@@ -121,7 +121,7 @@ MonoBehaviour:
   maxVelocity: 6
   groundCheck: {fileID: 309117482670437350}
   target: {fileID: 0}
-  activateDistance: 5
+  activateDistance: 15
   pathUpdate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeight: 0.8
@@ -143,7 +143,7 @@ Animator:
   m_GameObject: {fileID: 309117481900552807}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 30536544a0c37d148ba604a4ec1bfcb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: bc571713bebde1d40b1be10cd3cc1d7e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
