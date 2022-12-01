@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 309117481900552811}
   - component: {fileID: 309117481900552810}
   - component: {fileID: 309117481900552809}
+  - component: {fileID: -6634275523351271319}
   - component: {fileID: 309117481900552808}
   - component: {fileID: 309117481900552814}
   - component: {fileID: 309117481900552815}
@@ -108,6 +109,7 @@ MonoBehaviour:
   walkSpeed: 480
   maxHealth: 40
   mustPatrol: 0
+  animator: {fileID: -6634275523351271319}
   rb: {fileID: 309117481900552808}
   groundCheckPos: {fileID: 309117482670437350}
   groundLayer:
@@ -119,7 +121,7 @@ MonoBehaviour:
   maxVelocity: 6
   groundCheck: {fileID: 309117482670437350}
   target: {fileID: 0}
-  activateDistance: 25
+  activateDistance: 10
   pathUpdate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeight: 0.8
@@ -131,6 +133,26 @@ MonoBehaviour:
   bombDamage: 20
   colorChangeSetter: 0.1
   isGrounded: 0
+--- !u!95 &-6634275523351271319
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309117481900552807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30536544a0c37d148ba604a4ec1bfcb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &309117481900552808
 Rigidbody2D:
   serializedVersion: 4
