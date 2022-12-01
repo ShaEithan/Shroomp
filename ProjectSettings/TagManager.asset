@@ -13,6 +13,10 @@ TagManager:
   - FutureRoomChecker
   - Slash
   - Enemy
+  - Rain
+  - Star
+  - RedFairy
+  - BlueFairy
   layers:
   - Default
   - TransparentFX
@@ -33,7 +37,7 @@ TagManager:
   - Coin
   - BossAltar
   - BlockOnlyColliders
-  - 
+  - Laser
   - 
   - 
   - 

@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 6599034967171892513}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7061803120936197057
 MonoBehaviour:
@@ -301,6 +301,8 @@ MonoBehaviour:
   bombSprite: {fileID: -808259912, guid: 1af520d962cd7d746976a99e216411c4, type: 3}
   bDashSprite: {fileID: -2130948396, guid: 1af520d962cd7d746976a99e216411c4, type: 3}
   wideSprite: {fileID: 2079343326, guid: 1af520d962cd7d746976a99e216411c4, type: 3}
+  redSprite: {fileID: 21300000, guid: ff4487809aef1d84dad59e8d05a160c5, type: 3}
+  blueSprite: {fileID: 21300000, guid: 77953481b523ad54a8dc14792ede6833, type: 3}
   itemOffset: 70
 --- !u!1 &6599034967256963821
 GameObject:
