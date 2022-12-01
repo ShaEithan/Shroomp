@@ -28,7 +28,7 @@ public class DontDestroyOnload : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
-        if (scene.name == "StartScreen")
+        if (scene.name == "StartScreen" || scene.name =="EndScreen")
             Destroy(gameObject);
     }
 }

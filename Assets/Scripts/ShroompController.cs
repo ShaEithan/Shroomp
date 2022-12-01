@@ -66,10 +66,10 @@ public class ShroompController : MonoBehaviour
     [SerializeField]
     private int maxHealth = 5;
     public int currentHealth;
-    private float timeInvincible = 2.0f;
+    public float timeInvincible = 5f;
 
-    bool isInvincible;
-    float invincibleTimer;
+    public bool isInvincible = false;
+    public float invincibleTimer = 0f;
 
     //TextMeshProUGUI textHealth;
     //Transform healthCanvasPos;
@@ -578,28 +578,31 @@ public class ShroompController : MonoBehaviour
     {
         if (amount < 0)
         {
-
-            if (isInvincible)
-                return;
-            if(blueFairy.isActiveAndEnabled && blueFairy.shieldStatus)
+            if (blueFairy.isActiveAndEnabled && blueFairy.shieldStatus)
             {
                 audioSource.PlayOneShot(Shield);
                 blueFairy.shieldStatus = false;
                 return;
             }
-
+            if (isInvincible)
+                return;
             isInvincible = true;
             invincibleTimer = timeInvincible;
+
+
+
         }
+ 
         animator.SetTrigger("Hurt");
         audioSource.PlayOneShot(hurt);
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         healhTracker.createContainers();
+  
         if (currentHealth ==0)
         {
             isDead = true;
             deathDelayTime = deathDelaySetter;
-            mainCamera.m_Lens.OrthographicSize = 0.75f;
+            //mainCamera.m_Lens.OrthographicSize = 0.75f;
         }
         
     }

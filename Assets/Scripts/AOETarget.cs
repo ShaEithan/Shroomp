@@ -20,7 +20,7 @@ public class AOETarget : MonoBehaviour
         if (target != null)
         {
             hasTarget = true;
-            if (Vector3.Distance(transform.position, target.transform.position) > 5)
+            if (Vector3.Distance(transform.position, target.transform.position) > GetComponent<CircleCollider2D>().radius)
             {
                 target = null;
                 hasTarget = false;
