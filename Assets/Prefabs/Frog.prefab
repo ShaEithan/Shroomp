@@ -121,7 +121,7 @@ MonoBehaviour:
   maxVelocity: 6
   groundCheck: {fileID: 309117482670437350}
   target: {fileID: 0}
-  activateDistance: 10
+  activateDistance: 5
   pathUpdate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeight: 0.8
@@ -305,7 +305,7 @@ MonoBehaviour:
   - {x: -0.7179463, y: -0.1598922, z: 0}
   m_ShapePathHash: -2010395872
   m_Mesh: {fileID: 0}
-  m_InstanceId: 71306
+  m_InstanceId: 64168
 --- !u!1 &309117482670437345
 GameObject:
   m_ObjectHideFlags: 0
