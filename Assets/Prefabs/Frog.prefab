@@ -121,7 +121,7 @@ MonoBehaviour:
   maxVelocity: 6
   groundCheck: {fileID: 309117482670437350}
   target: {fileID: 0}
-  activateDistance: 5
+  activateDistance: 15
   pathUpdate: 0.5
   nextWaypointDistance: 3
   jumpNodeHeight: 0.8
