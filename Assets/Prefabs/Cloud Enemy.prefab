@@ -10026,8 +10026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104918328c257d1419f56a18a5865192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 75
-  damageTaken: 5
+  Health: 60
+  damageTaken: 10
   fireWeakness: 1
   iceWeakness: 1
   enemyDamage: 1

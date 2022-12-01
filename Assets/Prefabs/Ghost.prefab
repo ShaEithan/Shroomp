@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 80
-  damageTaken: 5
+  damageTaken: 20
   fireWeakness: 1
   iceWeakness: 1
   enemyDamage: 1

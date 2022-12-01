@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 using UnityEngine.SceneManagement;
-using SpriteGlow;
+//using SpriteGlow;
 using System.Collections;
 
 public class ShroompController : MonoBehaviour
@@ -691,7 +691,7 @@ public class ShroompController : MonoBehaviour
             bDashObject.AddComponent(typeof(SpriteRenderer));
             bDashObject.AddComponent(typeof(Rigidbody2D));
             bDashObject.AddComponent(typeof(BoxCollider2D));
-            bDashObject.AddComponent<SpriteGlowEffect>();
+           // bDashObject.AddComponent<SpriteGlowEffect>();
             bDashObject.tag = "PlayerShadow";
             bDashObject.layer = 7;
             //Assign correct components from original shroomp
@@ -704,8 +704,8 @@ public class ShroompController : MonoBehaviour
 
             bDashObject.GetComponent<SpriteRenderer>().sprite = dashSprite;
             bDashObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
-            bDashObject.GetComponent<SpriteGlowEffect>().DrawOutside = true;
-            bDashObject.GetComponent<SpriteGlowEffect>().GlowColor = new Color(0.1647059f, 0f, 1f, 1f);
+            //bDashObject.GetComponent<SpriteGlowEffect>().DrawOutside = true;
+            //bDashObject.GetComponent<SpriteGlowEffect>().GlowColor = new Color(0.1647059f, 0f, 1f, 1f);
             bDashObject.GetComponent<SpriteRenderer>().enabled = false;
             //bDashObject.SetActive(true);
             bDashObject.transform.GetComponent<Rigidbody2D>().position = transform.position;
