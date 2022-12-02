@@ -279,9 +279,9 @@ GameObject:
   - component: {fileID: 7288906603220872282}
   - component: {fileID: 7288906603220872281}
   - component: {fileID: 7288906603220872280}
-  - component: {fileID: 7288906603220872287}
   - component: {fileID: 7288906603220872229}
-  m_Layer: 0
+  - component: {fileID: 3840463870664583649}
+  m_Layer: 8
   m_Name: GoldTear Targeter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.06}
   serializedVersion: 2
-  m_Radius: 3.59
+  m_Radius: 6.75
 --- !u!50 &7288906603220872281
 Rigidbody2D:
   serializedVersion: 4
@@ -412,21 +412,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7288906603220872287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7288906603220872285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7a882cd2b83a944923d028c7f0504b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  targetTag: Player
-  hasTarget: 0
 --- !u!114 &7288906603220872229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,3 +427,18 @@ MonoBehaviour:
   projectile: {fileID: 5165803698466723649, guid: 4d9e342be83ec664a93a4e4b892a8cb2, type: 3}
   rateOfFire: 2
   speedOfFire: 0
+--- !u!114 &3840463870664583649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7288906603220872285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7a882cd2b83a944923d028c7f0504b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetTag: Player
+  hasTarget: 0

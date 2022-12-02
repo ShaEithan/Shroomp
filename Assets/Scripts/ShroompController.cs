@@ -60,7 +60,7 @@ public class ShroompController : MonoBehaviour
     private float lastImageXpos;
 
     // Scene Stuff
-    Scene currentScene = SceneManager.GetActiveScene();
+    Scene currentScene;
     string sceneName;
 
   

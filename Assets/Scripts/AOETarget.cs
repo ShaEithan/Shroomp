@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class AOETarget : MonoBehaviour
 {
-    public GameObject target;
+    [SerializeField]
+    private GameObject target =null;
     public string targetTag;
     public bool hasTarget = false;
     // Start is called before the first frame update
@@ -28,17 +29,24 @@ public class AOETarget : MonoBehaviour
         }
         if(target == null)
         {
-            target = null;
+            //target = null;
             hasTarget = false;
         }
-
+        GetComponent<AOETarget>().enabled = true;
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
+        
         if(collision.CompareTag(targetTag))
         {
-            if (target == null)
+            
+            if (!hasTarget)
+            {
+                Debug.Log("COLLISION WITH SPECIAL" + collision + " tag is " + collision.tag + " name " + collision.name);
                 target = collision.gameObject;
+                Debug.Log("SPECIAL TARGET IS NOW: " + target);
+                hasTarget = true;
+            }
             else if (Vector3.Distance(transform.position, collision.transform.position) < Vector3.Distance(transform.position, target.transform.position))
             {
                 target = collision.gameObject;

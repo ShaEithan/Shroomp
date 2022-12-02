@@ -50,15 +50,19 @@ public class GlobalEnemy : MonoBehaviour
             if (GetComponent<AIDestinationSetter>().target == null)
                 GetComponent<AIDestinationSetter>().target = FindObjectOfType<ShroompController>().transform.GetChild(18);
         }
+
+     
     }
     private float iceRate = 0.5f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && invulTime<=0)
+        Debug.Log("HEALTH IS: " + Health + " damage taken is " + damageTaken);
+        //Debug.Log("COLLIDED WITH SHROOMP? AT " + collision + " tag " + collision.tag + " is dashing? " +collision.gameObject.GetComponent<ShroompController>().isDashing);
+        if (collision.CompareTag("Player") && invulTime<=0)
         {
             if (collision.gameObject.GetComponent<ShroompController>().isDashing)
             {
-                ChangeHealth(-damageTaken);
+                ChangeHealth(-(damageTaken));
                 if (statusHandler.fireUp)
                 {
                     CancelInvoke("FireDot");
@@ -79,7 +83,7 @@ public class GlobalEnemy : MonoBehaviour
                 collision.gameObject.GetComponent<ShroompController>().ChangeHealth(-enemyDamage);
            
         }
-        if (collision.gameObject.tag == "Star")
+        if (collision.CompareTag("Star"))
         {
             ChangeHealth(-10);
             Destroy(collision.gameObject);
@@ -88,8 +92,10 @@ public class GlobalEnemy : MonoBehaviour
     }
     private void ChangeHealth(int i)
     {
-        audioSource.PlayOneShot(damageSound);
-        Health += i;
+        Debug.Log("Special " + i);
+        //audioSource.PlayOneShot(damageSound);
+        Health = Health + i;
+        Debug.Log("Special after" + Health);
         if (Health <= 0)
         {
             FindObjectOfType<RandomCoinSpawner>().spawnRandom(transform);

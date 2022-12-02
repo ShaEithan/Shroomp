@@ -10,7 +10,7 @@ public class FallRespawn : MonoBehaviour
     public GameObject player;
     public float minHeightForDeath;
 
-    Scene currentScene = SceneManager.GetActiveScene();
+    Scene currentScene;
     string sceneName;
     // Update is called once per frame
     void Update()
